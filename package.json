@@ -1,0 +1,23 @@
+{
+  "name": "hw_6",
+  "version": "1.0.0",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "description": "",
+  "dependencies": {
+    "body-parser": "^1.20.3",
+    "cookie-parser": "^1.4.7",
+    "express": "^4.21.1",
+    "jasmine": "^5.4.0",
+    "md5": "^2.3.0",
+    "mongoose": "^8.8.2"
+  },
+  "devDependencies": {
+    "jasmine-node": "^3.0.0"
+  }
+}
