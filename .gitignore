@@ -1,3 +1,4 @@
 node_modules
 npm-debug.log
-junit-report.xml
+.env
+.env.test
