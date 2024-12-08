@@ -3,7 +3,7 @@
 const express = require('express');
 const bodyParser = require('body-parser');
 const cookieParser = require('cookie-parser');
-const mongoose = require('mongoose');
+const mongoose = ('mongoose');
 const cors = require('cors');
 // require('dotenv').config(); // 加载环境变量
 
@@ -14,8 +14,10 @@ const app = express();
 app.use(bodyParser.json());
 app.use(cookieParser());
 app.use(cors({
-    origin: 'http://localhost:3000', // 根据需要调整前端 URL
-    credentials: true
+    origin: ['http://localhost:3000', 'https://your-frontend-domain.com'],
+    credentials: true,
+    methods: ['GET', 'POST', 'PUT', 'DELETE'],
+    allowedHeaders: ['Content-Type']
 }));
 
 // MongoDB connection URI
@@ -27,34 +29,46 @@ const dbUrl = process.env.MONGODB_URI || `mongodb+srv://${dbUser}:${encodeURICom
 
 // 仅在非测试环境下连接 MongoDB
 if (process.env.NODE_ENV !== 'test') {
-    mongoose.connect(dbUrl, {
-        serverApi: { version: '1', strict: true, deprecationErrors: true },
-    })
-    .then(() => console.log('Connected to MongoDB'))
-    .catch((err) => console.error('MongoDB connection error:', err));
+    const { connect } = require('mongoose');
+    connect(dbUrl)
+        .then(() => {
+            console.log('Successfully connected to MongoDB.');
+            console.log('Database:', dbName);
+            console.log('User:', dbUser);
+        })
+        .catch((err) => {
+            console.error('MongoDB connection error:', err);
+            process.exit(1);  // 如果连接失败，终止程序
+        });
 }
 
 // Import and use routes
 const authModule = require('./src/auth.js');
-authModule.setupAuthRoutes(app);
 
-const { User, Profile, Article, sessionUser, cookieKey } = authModule;
+const initApp = async () => {
+    await authModule.setupAuthRoutes(app);
+    
+    // 将后续代码也放入此函数
+    const { User, Profile, Article, sessionUser, cookieKey } = authModule;
+    const models = { User, Profile, Article };
+    const session = { sessionUser, cookieKey };
+    
+    require('./src/articles.js')(app, models, session);
+    require('./src/profile.js')(app, models, session);
+    require('./src/following.js')(app, models, session);
+    
+    // 仅在非测试环境下启动服务器
+    if (process.env.NODE_ENV !== 'test') {
+        const port = process.env.PORT || 3000;
+        app.listen(port, () => {
+            console.log(`Server is running on http://localhost:${port}`);
+        });
+    }
+};
 
-// Pass models and session variables to other modules
-const models = { User, Profile, Article };
-const session = { sessionUser, cookieKey };
-
-// Now we can require other modules and pass models and session
-require('./src/articles.js')(app, models, session);
-require('./src/profile.js')(app, models, session);
-require('./src/following.js')(app, models, session);
-
-// 仅在非测试环境下启动服务器
-if (process.env.NODE_ENV !== 'test') {
-    const port = process.env.PORT || 3000;
-    app.listen(port, () => {
-        console.log(`Server is running on http://localhost:${port}`);
-    });
-}
+initApp().catch(err => {
+    console.error('Failed to initialize app:', err);
+    process.exit(1);
+});
 
 module.exports = app; // Export app for testing

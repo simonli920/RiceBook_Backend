@@ -1,9 +1,8 @@
 # Backend Server for Assignment
 
 - **Test User**
-
-  - Username: "testuser123"
-  - Password: "pass123"
+  - Username: "joey"
+  - Password: "pass"
 
 - **Backend URL**
-  - https://git.heroku.com/draft-backend-yl330.git
+  - https://draft-backend-yl330.herokuapp.com

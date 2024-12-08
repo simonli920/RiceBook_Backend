@@ -3,7 +3,9 @@
   "version": "1.0.0",
   "main": "index.js",
   "scripts": {
-    "test": "jasmine"
+    "start": "node index.js",
+    "test": "NODE_ENV=test jasmine",
+    "dev": "nodemon index.js"
   },
   "keywords": [],
   "author": "",
@@ -17,13 +19,13 @@
     "express": "^4.21.1",
     "md5": "^2.3.0",
     "mongodb": "^6.11.0",
-    "mongoose": "^8.8.2"
+    "mongoose": "^8.8.4"
   },
   "devDependencies": {
-    "jasmine": "^5.4.0",
+    "jasmine": "^5.5.0",
     "jasmine-node": "^3.0.0",
     "jasmine-reporters": "^2.5.2",
-    "supertest": "^7.0.0",
-    "mongodb-memory-server": "^8.12.1"
+    "mongodb-memory-server": "^8.16.1",
+    "supertest": "^7.0.0"
   }
 }

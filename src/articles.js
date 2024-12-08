@@ -103,6 +103,6 @@ module.exports = (app, models, session) => {
     };
 
     app.get('/articles/:id?', isLoggedIn, getArticles);
-    app.put('/articles/:id', isLoggedIn, updateArticle);
     app.post('/article', isLoggedIn, addArticle);
+    app.put('/articles/:id', isLoggedIn, updateArticle);
 };
