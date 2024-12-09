@@ -17,17 +17,27 @@ const User = mongoose.model('User', userSchema);
 
 // Profile Schema and Model
 const profileSchema = new mongoose.Schema({
-    username: String,
-    email: String,
-    dob: Date,
-    phone: String,
-    zipcode: String,
-    avatar: String,
-    following: [String],
-    headline: String
+    username: { type: String, required: true },
+    headline: { type: String, default: '' },
+    email: { type: String, default: '' },
+    dob: { 
+        type: Date, 
+        default: Date.now,
+        set: function(value) {
+            // 如果是字符串日期，转换为 Date 对象
+            if (typeof value === 'string') {
+                return new Date(value);
+            }
+            return value;
+        }
+    },
+    phone: { type: String, default: '' },
+    zipcode: { type: String, default: '' },
+    avatar: { type: String, default: '' },
+    following: { type: [String], default: [] }
 });
 
-const Profile = mongoose.model('Profile', profileSchema);
+const Profile = mongoose.model('profile', profileSchema);
 
 // Article Schema and Model
 const articleSchema = new mongoose.Schema({
@@ -67,10 +77,13 @@ const setupAuthRoutes = async (app) => {
             // 创建用户档案
             const profile = new Profile({
                 username,
-                email,
-                dob: new Date(dob),
-                phone,
-                zipcode
+                headline: '',
+                email: email || '',
+                dob: dob ? new Date(dob) : new Date(),
+                phone: phone || '',
+                zipcode: zipcode || '',
+                avatar: '',
+                following: []
             });
             await profile.save();
 
@@ -163,10 +176,32 @@ const setupAuthRoutes = async (app) => {
         }
     };
 
+    const updatePassword = async (req, res) => {
+        const { password } = req.body;
+        if (!password) {
+            return res.status(400).send('密码不能为空');
+        }
+
+        try {
+            const salt = await bcrypt.genSalt(10);
+            const hash = await bcrypt.hash(password, salt);
+
+            await User.findOneAndUpdate(
+                { username: req.username },
+                { hash }
+            );
+
+            res.status(200).json({ username: req.username, status: 'password updated' });
+        } catch (err) {
+            res.status(500).send(`更新密码失败: ${err.message}`);
+        }
+    };
+
     // 设置路由
     app.post('/register', register);
     app.post('/login', login);
     app.put('/logout', logout);
+    app.put('/password', isLoggedIn, updatePassword);
 
     // 创建测试用户并等待完成
     await createTestUser();
@@ -182,10 +217,16 @@ const setupAuthRoutes = async (app) => {
 
 const isLoggedIn = (req, res, next) => {
     const sid = req.cookies[cookieKey];
-    if (!sid || !sessionUser[sid]) {
+    if (!sid) {
         return res.status(401).send('Unauthorized: No session ID');
     }
-    req.username = sessionUser[sid].username;
+
+    const user = sessionUser[sid];
+    if (!user) {
+        return res.status(401).send('Unauthorized: Invalid session ID');
+    }
+
+    req.username = user.username;
     next();
 };
 

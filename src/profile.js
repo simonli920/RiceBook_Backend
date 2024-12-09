@@ -7,12 +7,18 @@ module.exports = (app, { User, Profile }, { sessionUser, cookieKey }) => {
     app.get('/email/:user?', isLoggedIn, async (req, res) => {
         const username = req.params.user || req.username;
         const profile = await Profile.findOne({ username });
-        res.json({ email: profile.email });
+        if (!profile) {
+            return res.status(404).send('用户不存在');
+        }
+        res.json({ username, email: profile.email || '' });
     });
 
     app.put('/email', isLoggedIn, async (req, res) => {
         const { email } = req.body;
-        await Profile.findOneAndUpdate({ username: req.username }, { email });
+        await Profile.findOneAndUpdate(
+            { username: req.username },
+            { email }
+        );
         res.json({ email });
     });
 
@@ -20,12 +26,18 @@ module.exports = (app, { User, Profile }, { sessionUser, cookieKey }) => {
     app.get('/phone/:user?', isLoggedIn, async (req, res) => {
         const username = req.params.user || req.username;
         const profile = await Profile.findOne({ username });
-        res.json({ phone: profile.phone });
+        if (!profile) {
+            return res.status(404).send('用户不存在');
+        }
+        res.json({ username, phone: profile.phone || '' });
     });
 
     app.put('/phone', isLoggedIn, async (req, res) => {
         const { phone } = req.body;
-        await Profile.findOneAndUpdate({ username: req.username }, { phone });
+        await Profile.findOneAndUpdate(
+            { username: req.username },
+            { phone }
+        );
         res.json({ phone });
     });
 
@@ -59,5 +71,37 @@ module.exports = (app, { User, Profile }, { sessionUser, cookieKey }) => {
     app.get('/dob', isLoggedIn, async (req, res) => {
         const profile = await Profile.findOne({ username: req.username });
         res.json({ dob: profile.dob.getTime() });
+    });
+
+    // Headline endpoints
+    app.get('/headline/:user?', isLoggedIn, async (req, res) => {
+        try {
+            const username = req.params.user || req.username;
+            const profile = await Profile.findOne({ username });
+            
+            if (!profile) {
+                return res.status(404).send('用户不存在');
+            }
+            
+            res.json({ username, headline: profile.headline || '' });
+        } catch (err) {
+            res.status(500).send(`获取 headline 失败: ${err.message}`);
+        }
+    });
+
+    app.put('/headline', isLoggedIn, async (req, res) => {
+        try {
+            const { headline } = req.body;
+            
+            const profile = await Profile.findOneAndUpdate(
+                { username: req.username },
+                { headline },
+                { new: true, upsert: true }
+            );
+            
+            res.json({ username: req.username, headline: profile.headline });
+        } catch (err) {
+            res.status(500).send(`更新 headline 失败: ${err.message}`);
+        }
     });
 };

@@ -4,7 +4,7 @@
   "main": "index.js",
   "scripts": {
     "start": "node index.js",
-    "test": "NODE_ENV=test jasmine",
+    "test": "NODE_ENV=test jasmine --config=spec/support/jasmine.json",
     "dev": "nodemon index.js"
   },
   "keywords": [],

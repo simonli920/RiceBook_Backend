@@ -4,6 +4,7 @@ process.env.NODE_ENV = 'test'; // 设置测试环境
 // require('dotenv').config({ path: '.env.test' }); // 加载测试环境变量（如果需要）
 
 const request = require('supertest');
+const express = require('express');
 const { MongoMemoryServer } = require('mongodb-memory-server');
 const mongoose = require('mongoose');
 const app = require('../index'); // 引入主应用程序
@@ -36,6 +37,9 @@ describe('Backend API Tests', () => {
     let mongoServer;
 
     beforeAll(async () => {
+        // 等待应用初始化
+        await app;
+        
         // 启动内存中的 MongoDB
         mongoServer = await MongoMemoryServer.create();
         const uri = mongoServer.getUri();
@@ -190,5 +194,61 @@ describe('Backend API Tests', () => {
         expect(comment.text).toBe(commentText);
         expect(comment.author).toBe(testUserId);
         expect(comment.commentId).toBe(1);
+    });
+});
+
+describe('Articles API Tests', () => {
+    let mongoServer;
+    let agent;
+    const testUser = {
+        username: 'testuser',
+        password: 'testpass'
+    };
+
+    beforeAll(async () => {
+        // 设置测试数据库
+        mongoServer = await MongoMemoryServer.create();
+        const mongoUri = mongoServer.getUri();
+        await mongoose.connect(mongoUri);
+
+        // 注册测试用户
+        await agent.post('/register').send(testUser);
+        await agent.post('/login').send(testUser);
+    });
+
+    afterAll(async () => {
+        await mongoose.disconnect();
+        await mongoServer.stop();
+    });
+
+    it('should create and retrieve an article', async () => {
+        // 创建文章
+        const createResponse = await agent
+            .post('/article')
+            .send({ text: 'Test article' });
+        
+        expect(createResponse.status).toBe(200);
+        expect(createResponse.body.articles.length).toBeGreaterThan(0);
+        expect(createResponse.body.articles[0].text).toBe('Test article');
+
+        // 获取文章
+        const getResponse = await agent.get('/articles');
+        expect(getResponse.status).toBe(200);
+        expect(getResponse.body.articles.length).toBeGreaterThan(0);
+    });
+
+    it('should get a specific article by id', async () => {
+        const response = await agent.get('/articles/1');
+        expect(response.status).toBe(200);
+        expect(response.body.articles.length).toBe(1);
+    });
+
+    it('should update an article', async () => {
+        const response = await agent
+            .put('/articles/1')
+            .send({ text: 'Updated article' });
+        
+        expect(response.status).toBe(200);
+        expect(response.body.articles[0].text).toBe('Updated article');
     });
 });

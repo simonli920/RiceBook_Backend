@@ -1,85 +1,80 @@
 <?xml version="1.0" encoding="UTF-8" ?>
-<testsuites disabled="0" errors="0" failures="47" tests="22" time="0.595">
- <testsuite name="Backend API Tests" timestamp="2024-11-24T02:25:11" hostname="localhost" time="0.371" errors="0" tests="9" skipped="0" disabled="0" failures="14">
-  <testcase classname="Backend API Tests" name="should register a new user" time="0.081" />
-  <testcase classname="Backend API Tests" name="should log in as the new user" time="0.054" />
-  <testcase classname="Backend API Tests" name="should create a new article and verify it was added" time="0.002">
+<testsuites disabled="0" errors="0" failures="46" tests="22" time="0.845">
+ <testsuite name="Backend API Tests" timestamp="2024-12-08T18:49:27" hostname="localhost" time="0.606" errors="0" tests="9" skipped="0" disabled="0" failures="13">
+  <testcase classname="Backend API Tests" name="should register a new user" time="0.085" />
+  <testcase classname="Backend API Tests" name="should log in as the new user" time="0.056" />
+  <testcase classname="Backend API Tests" name="should create a new article and verify it was added" time="0.003">
    <failure type="toBe" message="Expected 401 to be 200."><![CDATA[at <Jasmine>
-    at UserContext.<anonymous> (/Users/liyihong/Desktop/RICE/531_Comp/Homework/HW_6/src/articles.spec.js:78:37)
+    at UserContext.<anonymous> (/Users/liyihong/Desktop/RICE/531_Comp/Homework/HW_6/src/articles.spec.js:89:37)
     at process.processTicksAndRejections (node:internal/process/task_queues:95:5)]]>
    </failure>
    <failure type="toBeDefined" message="Expected undefined to be defined."><![CDATA[at <Jasmine>
-    at UserContext.<anonymous> (/Users/liyihong/Desktop/RICE/531_Comp/Homework/HW_6/src/articles.spec.js:79:40)
+    at UserContext.<anonymous> (/Users/liyihong/Desktop/RICE/531_Comp/Homework/HW_6/src/articles.spec.js:90:40)
     at process.processTicksAndRejections (node:internal/process/task_queues:95:5)]]>
    </failure>
-   <failure type="exception" message="TypeError: Cannot read properties of undefined (reading &apos;length&apos;)"><![CDATA[at UserContext.<anonymous> (/Users/liyihong/Desktop/RICE/531_Comp/Homework/HW_6/src/articles.spec.js:80:39)
+   <failure type="exception" message="TypeError: Cannot read properties of undefined (reading &apos;length&apos;)"><![CDATA[at UserContext.<anonymous> (/Users/liyihong/Desktop/RICE/531_Comp/Homework/HW_6/src/articles.spec.js:91:39)
     at process.processTicksAndRejections (node:internal/process/task_queues:95:5)]]>
    </failure>
   </testcase>
   <testcase classname="Backend API Tests" name="should update the headline and verify the change" time="0.003">
-   <failure type="toBe" message="Expected 401 to be 200."><![CDATA[at <Jasmine>
-    at UserContext.<anonymous> (/Users/liyihong/Desktop/RICE/531_Comp/Homework/HW_6/src/articles.spec.js:99:37)
+   <failure type="toBe" message="Expected 404 to be 200."><![CDATA[at <Jasmine>
+    at UserContext.<anonymous> (/Users/liyihong/Desktop/RICE/531_Comp/Homework/HW_6/src/articles.spec.js:110:37)
     at process.processTicksAndRejections (node:internal/process/task_queues:95:5)]]>
    </failure>
    <failure type="toBe" message="Expected undefined to be &apos;Updated headline&apos;."><![CDATA[at <Jasmine>
-    at UserContext.<anonymous> (/Users/liyihong/Desktop/RICE/531_Comp/Homework/HW_6/src/articles.spec.js:100:40)
+    at UserContext.<anonymous> (/Users/liyihong/Desktop/RICE/531_Comp/Homework/HW_6/src/articles.spec.js:111:40)
     at process.processTicksAndRejections (node:internal/process/task_queues:95:5)]]>
    </failure>
-   <failure type="toBe" message="Expected 401 to be 200."><![CDATA[at <Jasmine>
-    at UserContext.<anonymous> (/Users/liyihong/Desktop/RICE/531_Comp/Homework/HW_6/src/articles.spec.js:103:48)
+   <failure type="toBe" message="Expected 404 to be 200."><![CDATA[at <Jasmine>
+    at UserContext.<anonymous> (/Users/liyihong/Desktop/RICE/531_Comp/Homework/HW_6/src/articles.spec.js:114:48)
     at process.processTicksAndRejections (node:internal/process/task_queues:95:5)]]>
    </failure>
    <failure type="toBe" message="Expected undefined to be &apos;Updated headline&apos;."><![CDATA[at <Jasmine>
-    at UserContext.<anonymous> (/Users/liyihong/Desktop/RICE/531_Comp/Homework/HW_6/src/articles.spec.js:104:51)
+    at UserContext.<anonymous> (/Users/liyihong/Desktop/RICE/531_Comp/Homework/HW_6/src/articles.spec.js:115:51)
     at process.processTicksAndRejections (node:internal/process/task_queues:95:5)]]>
    </failure>
   </testcase>
-  <testcase classname="Backend API Tests" name="should log out the user" time="0.001">
-   <failure type="toBe" message="Expected 401 to be 200."><![CDATA[at <Jasmine>
-    at UserContext.<anonymous> (/Users/liyihong/Desktop/RICE/531_Comp/Homework/HW_6/src/articles.spec.js:109:37)
-    at process.processTicksAndRejections (node:internal/process/task_queues:95:5)]]>
-   </failure>
-  </testcase>
+  <testcase classname="Backend API Tests" name="should log out the user" time="0.002" />
   <testcase classname="Backend API Tests" name="should not allow access to protected routes after logout" time="0.001" />
-  <testcase classname="Backend API Tests" name="should retrieve an article by PID" time="0.054">
+  <testcase classname="Backend API Tests" name="should retrieve an article by PID" time="0.056">
    <failure type="toBe" message="Expected 401 to be 200."><![CDATA[at <Jasmine>
-    at UserContext.<anonymous> (/Users/liyihong/Desktop/RICE/531_Comp/Homework/HW_6/src/articles.spec.js:133:43)
+    at UserContext.<anonymous> (/Users/liyihong/Desktop/RICE/531_Comp/Homework/HW_6/src/articles.spec.js:144:43)
     at process.processTicksAndRejections (node:internal/process/task_queues:95:5)]]>
    </failure>
-   <failure type="exception" message="TypeError: Cannot read properties of undefined (reading &apos;length&apos;)"><![CDATA[at UserContext.<anonymous> (/Users/liyihong/Desktop/RICE/531_Comp/Homework/HW_6/src/articles.spec.js:134:45)
+   <failure type="exception" message="TypeError: Cannot read properties of undefined (reading &apos;length&apos;)"><![CDATA[at UserContext.<anonymous> (/Users/liyihong/Desktop/RICE/531_Comp/Homework/HW_6/src/articles.spec.js:145:45)
     at process.processTicksAndRejections (node:internal/process/task_queues:95:5)]]>
    </failure>
   </testcase>
-  <testcase classname="Backend API Tests" name="should return 404 when requesting a non-existent article PID" time="0.002">
+  <testcase classname="Backend API Tests" name="should return 404 when requesting a non-existent article PID" time="0.001">
    <failure type="toBe" message="Expected 401 to be 404."><![CDATA[at <Jasmine>
-    at UserContext.<anonymous> (/Users/liyihong/Desktop/RICE/531_Comp/Homework/HW_6/src/articles.spec.js:149:37)
+    at UserContext.<anonymous> (/Users/liyihong/Desktop/RICE/531_Comp/Homework/HW_6/src/articles.spec.js:160:37)
     at process.processTicksAndRejections (node:internal/process/task_queues:95:5)]]>
    </failure>
    <failure type="toBe" message="Expected &apos;Unauthorized: No session ID&apos; to be &apos;Article not found&apos;."><![CDATA[at <Jasmine>
-    at UserContext.<anonymous> (/Users/liyihong/Desktop/RICE/531_Comp/Homework/HW_6/src/articles.spec.js:150:31)
+    at UserContext.<anonymous> (/Users/liyihong/Desktop/RICE/531_Comp/Homework/HW_6/src/articles.spec.js:161:31)
     at process.processTicksAndRejections (node:internal/process/task_queues:95:5)]]>
    </failure>
   </testcase>
-  <testcase classname="Backend API Tests" name="should add a comment to an article" time="0.053">
+  <testcase classname="Backend API Tests" name="should add a comment to an article" time="0.055">
    <failure type="toBe" message="Expected 401 to be 200."><![CDATA[at <Jasmine>
-    at UserContext.<anonymous> (/Users/liyihong/Desktop/RICE/531_Comp/Homework/HW_6/src/articles.spec.js:164:50)
+    at UserContext.<anonymous> (/Users/liyihong/Desktop/RICE/531_Comp/Homework/HW_6/src/articles.spec.js:175:50)
     at process.processTicksAndRejections (node:internal/process/task_queues:95:5)]]>
    </failure>
-   <failure type="exception" message="TypeError: Cannot read properties of undefined (reading &apos;0&apos;)"><![CDATA[at UserContext.<anonymous> (/Users/liyihong/Desktop/RICE/531_Comp/Homework/HW_6/src/articles.spec.js:165:60)
+   <failure type="exception" message="TypeError: Cannot read properties of undefined (reading &apos;0&apos;)"><![CDATA[at UserContext.<anonymous> (/Users/liyihong/Desktop/RICE/531_Comp/Homework/HW_6/src/articles.spec.js:176:60)
     at process.processTicksAndRejections (node:internal/process/task_queues:95:5)]]>
    </failure>
   </testcase>
  </testsuite>
- <testsuite name="New Sample Test Suite" timestamp="2024-11-24T02:25:12" hostname="localhost" time="0" errors="0" tests="1" skipped="0" disabled="0" failures="0">
+ <testsuite name="New Sample Test Suite" timestamp="2024-12-08T18:49:27" hostname="localhost" time="0" errors="0" tests="1" skipped="0" disabled="0" failures="0">
   <testcase classname="New Sample Test Suite" name="should pass another simple test" time="0" />
  </testsuite>
- <testsuite name="Profile API Tests" timestamp="2024-11-24T02:25:12" hostname="localhost" time="0.224" errors="0" tests="11" skipped="0" disabled="0" failures="33">
-  <testcase classname="Profile API Tests" name="should get the profile headline" time="0.001">
-   <failure type="toBe" message="Expected 401 to be 200."><![CDATA[at <Jasmine>
+ <testsuite name="Profile API Tests" timestamp="2024-12-08T18:49:27" hostname="localhost" time="0.239" errors="0" tests="11" skipped="0" disabled="0" failures="33">
+  <testcase classname="Profile API Tests" name="should get the profile headline" time="0.002">
+   <failure type="toBe" message="Expected 404 to be 200."><![CDATA[at <Jasmine>
     at UserContext.<anonymous> (/Users/liyihong/Desktop/RICE/531_Comp/Homework/HW_6/src/profile.spec.js:72:37)
     at process.processTicksAndRejections (node:internal/process/task_queues:95:5)]]>
    </failure>
-   <failure type="toBe" message="Expected undefined to be &apos;testUser1732436712410&apos;."><![CDATA[at <Jasmine>
+   <failure type="toBe" message="Expected undefined to be &apos;testUser1733705367814&apos;."><![CDATA[at <Jasmine>
     at UserContext.<anonymous> (/Users/liyihong/Desktop/RICE/531_Comp/Homework/HW_6/src/profile.spec.js:73:40)
     at process.processTicksAndRejections (node:internal/process/task_queues:95:5)]]>
    </failure>
@@ -89,7 +84,7 @@
    </failure>
   </testcase>
   <testcase classname="Profile API Tests" name="should update the profile headline" time="0.002">
-   <failure type="toBe" message="Expected 401 to be 200."><![CDATA[at <Jasmine>
+   <failure type="toBe" message="Expected 404 to be 200."><![CDATA[at <Jasmine>
     at UserContext.<anonymous> (/Users/liyihong/Desktop/RICE/531_Comp/Homework/HW_6/src/profile.spec.js:82:37)
     at process.processTicksAndRejections (node:internal/process/task_queues:95:5)]]>
    </failure>
@@ -97,7 +92,7 @@
     at UserContext.<anonymous> (/Users/liyihong/Desktop/RICE/531_Comp/Homework/HW_6/src/profile.spec.js:83:40)
     at process.processTicksAndRejections (node:internal/process/task_queues:95:5)]]>
    </failure>
-   <failure type="toBe" message="Expected 401 to be 200."><![CDATA[at <Jasmine>
+   <failure type="toBe" message="Expected 404 to be 200."><![CDATA[at <Jasmine>
     at UserContext.<anonymous> (/Users/liyihong/Desktop/RICE/531_Comp/Homework/HW_6/src/profile.spec.js:86:40)
     at process.processTicksAndRejections (node:internal/process/task_queues:95:5)]]>
    </failure>
@@ -144,7 +139,7 @@
     at process.processTicksAndRejections (node:internal/process/task_queues:95:5)]]>
    </failure>
   </testcase>
-  <testcase classname="Profile API Tests" name="should update the zipcode" time="0.002">
+  <testcase classname="Profile API Tests" name="should update the zipcode" time="0.001">
    <failure type="toBe" message="Expected 401 to be 200."><![CDATA[at <Jasmine>
     at UserContext.<anonymous> (/Users/liyihong/Desktop/RICE/531_Comp/Homework/HW_6/src/profile.spec.js:122:37)
     at process.processTicksAndRejections (node:internal/process/task_queues:95:5)]]>
@@ -162,7 +157,7 @@
     at process.processTicksAndRejections (node:internal/process/task_queues:95:5)]]>
    </failure>
   </testcase>
-  <testcase classname="Profile API Tests" name="should get the phone number" time="0">
+  <testcase classname="Profile API Tests" name="should get the phone number" time="0.001">
    <failure type="toBe" message="Expected 401 to be 200."><![CDATA[at <Jasmine>
     at UserContext.<anonymous> (/Users/liyihong/Desktop/RICE/531_Comp/Homework/HW_6/src/profile.spec.js:132:37)
     at process.processTicksAndRejections (node:internal/process/task_queues:95:5)]]>
@@ -190,7 +185,7 @@
     at process.processTicksAndRejections (node:internal/process/task_queues:95:5)]]>
    </failure>
   </testcase>
-  <testcase classname="Profile API Tests" name="should get the date of birth" time="0">
+  <testcase classname="Profile API Tests" name="should get the date of birth" time="0.001">
    <failure type="toBe" message="Expected 401 to be 200."><![CDATA[at <Jasmine>
     at UserContext.<anonymous> (/Users/liyihong/Desktop/RICE/531_Comp/Homework/HW_6/src/profile.spec.js:151:37)
     at process.processTicksAndRejections (node:internal/process/task_queues:95:5)]]>
@@ -200,7 +195,7 @@
     at process.processTicksAndRejections (node:internal/process/task_queues:95:5)]]>
    </failure>
   </testcase>
-  <testcase classname="Profile API Tests" name="should get the avatar" time="0">
+  <testcase classname="Profile API Tests" name="should get the avatar" time="0.001">
    <failure type="toBe" message="Expected 401 to be 200."><![CDATA[at <Jasmine>
     at UserContext.<anonymous> (/Users/liyihong/Desktop/RICE/531_Comp/Homework/HW_6/src/profile.spec.js:159:37)
     at process.processTicksAndRejections (node:internal/process/task_queues:95:5)]]>
@@ -210,7 +205,7 @@
     at process.processTicksAndRejections (node:internal/process/task_queues:95:5)]]>
    </failure>
   </testcase>
-  <testcase classname="Profile API Tests" name="should update the avatar" time="0.002">
+  <testcase classname="Profile API Tests" name="should update the avatar" time="0.001">
    <failure type="toBe" message="Expected 401 to be 200."><![CDATA[at <Jasmine>
     at UserContext.<anonymous> (/Users/liyihong/Desktop/RICE/531_Comp/Homework/HW_6/src/profile.spec.js:168:37)
     at process.processTicksAndRejections (node:internal/process/task_queues:95:5)]]>
@@ -229,7 +224,7 @@
    </failure>
   </testcase>
  </testsuite>
- <testsuite name="Sample Test Suite" timestamp="2024-11-24T02:25:12" hostname="localhost" time="0" errors="0" tests="1" skipped="0" disabled="0" failures="0">
+ <testsuite name="Sample Test Suite" timestamp="2024-12-08T18:49:27" hostname="localhost" time="0" errors="0" tests="1" skipped="0" disabled="0" failures="0">
   <testcase classname="Sample Test Suite" name="should pass a simple test" time="0" />
  </testsuite>
 </testsuites>
