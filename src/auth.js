@@ -9,40 +9,38 @@ const cookieKey = 'sid'; // Session cookie key
 
 // User Schema and Model
 const userSchema = new mongoose.Schema({
-    username: { type: String, unique: true },
-    hash: String, // Password hash
+    username: String,
+    hash: String
 });
 
 const User = mongoose.model('User', userSchema);
 
 // Profile Schema and Model
 const profileSchema = new mongoose.Schema({
-    username: { type: String, unique: true },
-    headline: { type: String, default: 'Hello, this is my profile!' },
+    username: String,
     email: String,
-    zipcode: String,
-    phone: String,
     dob: Date,
-    avatar: { type: String, default: '' },
+    phone: String,
+    zipcode: String,
+    avatar: String,
     following: [String],
+    headline: String
 });
 
 const Profile = mongoose.model('Profile', profileSchema);
 
 // Article Schema and Model
-const commentSchema = new mongoose.Schema({
-    commentId: Number,
-    author: String,
-    text: String,
-    date: Date,
-});
-
 const articleSchema = new mongoose.Schema({
-    pid: Number,
     author: String,
     text: String,
-    date: Date,
-    comments: [commentSchema],
+    date: { type: Date, default: Date.now },
+    comments: [{
+        commentId: Number,
+        author: String,
+        text: String,
+        date: { type: Date, default: Date.now }
+    }],
+    pid: Number
 });
 
 const Article = mongoose.model('Article', articleSchema);
@@ -182,7 +180,18 @@ const setupAuthRoutes = async (app) => {
     };
 };
 
+const isLoggedIn = (req, res, next) => {
+    const sid = req.cookies[cookieKey];
+    if (!sid || !sessionUser[sid]) {
+        return res.status(401).send('Unauthorized: No session ID');
+    }
+    req.username = sessionUser[sid].username;
+    next();
+};
+
+// 导出中间件
 module.exports = {
+    isLoggedIn,
     setupAuthRoutes,
     User,
     Profile,

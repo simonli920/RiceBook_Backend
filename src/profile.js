@@ -1,120 +1,63 @@
 // src/profile.js
 
-module.exports = (app, models, session) => {
-    const { isLoggedIn } = require('./authMiddleware')(session.sessionUser, session.cookieKey);
-    const { Profile } = models;
+module.exports = (app, { User, Profile }, { sessionUser, cookieKey }) => {
+    const isLoggedIn = require('./auth.js').isLoggedIn;
 
-    const getHeadline = async (req, res) => {
-        const username = req.params.user ? req.params.user : req.username;
+    // Email endpoints
+    app.get('/email/:user?', isLoggedIn, async (req, res) => {
+        const username = req.params.user || req.username;
         const profile = await Profile.findOne({ username });
-        if (!profile) return res.status(404).send('Profile not found');
-        res.status(200).send({ username: profile.username, headline: profile.headline });
-    };
+        res.json({ email: profile.email });
+    });
 
-    const updateHeadline = async (req, res) => {
-        const { headline } = req.body;
-        if (!headline) return res.status(400).send('Missing headline');
-        const profile = await Profile.findOneAndUpdate(
-            { username: req.username },
-            { headline },
-            { new: true }
-        );
-        res.status(200).send({ username: profile.username, headline: profile.headline });
-    };
-
-    const getEmail = async (req, res) => {
-        const username = req.params.user ? req.params.user : req.username;
-        const profile = await Profile.findOne({ username });
-        if (!profile) return res.status(404).send('Profile not found');
-        res.status(200).send({ username: profile.username, email: profile.email });
-    };
-
-    const updateEmail = async (req, res) => {
+    app.put('/email', isLoggedIn, async (req, res) => {
         const { email } = req.body;
-        if (!email) return res.status(400).send('Missing email');
-        const profile = await Profile.findOneAndUpdate(
-            { username: req.username },
-            { email },
-            { new: true }
-        );
-        res.status(200).send({ username: profile.username, email: profile.email });
-    };
+        await Profile.findOneAndUpdate({ username: req.username }, { email });
+        res.json({ email });
+    });
 
-    const getZipcode = async (req, res) => {
-        const username = req.params.user ? req.params.user : req.username;
+    // Phone endpoints
+    app.get('/phone/:user?', isLoggedIn, async (req, res) => {
+        const username = req.params.user || req.username;
         const profile = await Profile.findOne({ username });
-        if (!profile) return res.status(404).send('Profile not found');
-        res.status(200).send({ username: profile.username, zipcode: profile.zipcode });
-    };
+        res.json({ phone: profile.phone });
+    });
 
-    const updateZipcode = async (req, res) => {
-        const { zipcode } = req.body;
-        if (!zipcode) return res.status(400).send('Missing zipcode');
-        const profile = await Profile.findOneAndUpdate(
-            { username: req.username },
-            { zipcode },
-            { new: true }
-        );
-        res.status(200).send({ username: profile.username, zipcode: profile.zipcode });
-    };
-
-    const getPhone = async (req, res) => {
-        const username = req.params.user ? req.params.user : req.username;
-        const profile = await Profile.findOne({ username });
-        if (!profile) return res.status(404).send('Profile not found');
-        res.status(200).send({ username: profile.username, phone: profile.phone });
-    };
-
-    const updatePhone = async (req, res) => {
+    app.put('/phone', isLoggedIn, async (req, res) => {
         const { phone } = req.body;
-        if (!phone) return res.status(400).send('Missing phone');
-        const profile = await Profile.findOneAndUpdate(
-            { username: req.username },
-            { phone },
-            { new: true }
-        );
-        res.status(200).send({ username: profile.username, phone: profile.phone });
-    };
+        await Profile.findOneAndUpdate({ username: req.username }, { phone });
+        res.json({ phone });
+    });
 
-    const getDob = async (req, res) => {
-        const username = req.params.user ? req.params.user : req.username;
+    // Zipcode endpoints
+    app.get('/zipcode/:user?', isLoggedIn, async (req, res) => {
+        const username = req.params.user || req.username;
         const profile = await Profile.findOne({ username });
-        if (!profile) return res.status(404).send('Profile not found');
-        res.status(200).send({ username: profile.username, dob: profile.dob.getTime() });
-    };
+        res.json({ zipcode: profile.zipcode });
+    });
 
-    const getAvatar = async (req, res) => {
-        const username = req.params.user ? req.params.user : req.username;
+    app.put('/zipcode', isLoggedIn, async (req, res) => {
+        const { zipcode } = req.body;
+        await Profile.findOneAndUpdate({ username: req.username }, { zipcode });
+        res.json({ zipcode });
+    });
+
+    // Avatar endpoints
+    app.get('/avatar/:user?', isLoggedIn, async (req, res) => {
+        const username = req.params.user || req.username;
         const profile = await Profile.findOne({ username });
-        if (!profile) return res.status(404).send('Profile not found');
-        res.status(200).send({ username: profile.username, avatar: profile.avatar });
-    };
+        res.json({ avatar: profile.avatar || '' });
+    });
 
-    const updateAvatar = async (req, res) => {
+    app.put('/avatar', isLoggedIn, async (req, res) => {
         const { avatar } = req.body;
-        if (!avatar) return res.status(400).send('Missing avatar');
-        const profile = await Profile.findOneAndUpdate(
-            { username: req.username },
-            { avatar },
-            { new: true }
-        );
-        res.status(200).send({ username: profile.username, avatar: profile.avatar });
-    };
+        await Profile.findOneAndUpdate({ username: req.username }, { avatar });
+        res.json({ avatar });
+    });
 
-    app.get('/headline/:user?', isLoggedIn, getHeadline);
-    app.put('/headline', isLoggedIn, updateHeadline);
-
-    app.get('/email/:user?', isLoggedIn, getEmail);
-    app.put('/email', isLoggedIn, updateEmail);
-
-    app.get('/zipcode/:user?', isLoggedIn, getZipcode);
-    app.put('/zipcode', isLoggedIn, updateZipcode);
-
-    app.get('/phone/:user?', isLoggedIn, getPhone);
-    app.put('/phone', isLoggedIn, updatePhone);
-
-    app.get('/dob/:user?', isLoggedIn, getDob);
-
-    app.get('/avatar/:user?', isLoggedIn, getAvatar);
-    app.put('/avatar', isLoggedIn, updateAvatar);
+    // DOB endpoint
+    app.get('/dob', isLoggedIn, async (req, res) => {
+        const profile = await Profile.findOne({ username: req.username });
+        res.json({ dob: profile.dob.getTime() });
+    });
 };
