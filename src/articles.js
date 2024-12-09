@@ -20,7 +20,7 @@ module.exports = (app, { Article }, { sessionUser, cookieKey }) => {
                 res.json({ articles });
             }
         } catch (err) {
-            res.status(500).send(`获取文章失败: ${err.message}`);
+            res.status(500).send(`Failed to get article: ${err.message}`);
         }
     });
 
@@ -29,7 +29,7 @@ module.exports = (app, { Article }, { sessionUser, cookieKey }) => {
         try {
             const { text } = req.body;
             if (!text) {
-                return res.status(400).send('文章内容不能为空');
+                return res.status(400).send('Article content cannot be empty');
             }
 
             // 获取最新的 pid
@@ -47,7 +47,7 @@ module.exports = (app, { Article }, { sessionUser, cookieKey }) => {
             await newArticle.save();
             res.json({ articles: [newArticle] });
         } catch (err) {
-            res.status(500).send(`创建文章失败: ${err.message}`);
+            res.status(500).send(`Failed to create article: ${err.message}`);
         }
     });
 
@@ -58,23 +58,23 @@ module.exports = (app, { Article }, { sessionUser, cookieKey }) => {
             const { text } = req.body;
             
             if (!text) {
-                return res.status(400).send('文章内容不能为空');
+                return res.status(400).send('Article content cannot be empty');
             }
 
             const article = await Article.findOne({ pid: parseInt(id) });
             if (!article) {
-                return res.status(404).send('文章未找到');
+                return res.status(404).send('Article not found');
             }
 
             if (article.author !== req.username) {
-                return res.status(403).send('无权修改他人文章');
+                return res.status(403).send('No permission to modify others article');
             }
 
             article.text = text;
             await article.save();
             res.json({ articles: [article] });
         } catch (err) {
-            res.status(500).send(`更新文章失败: ${err.message}`);
+            res.status(500).send(`Failed to update article: ${err.message}`);
         }
     });
 }

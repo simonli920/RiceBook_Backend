@@ -8,7 +8,7 @@ module.exports = (app, { User, Profile }, { sessionUser, cookieKey }) => {
         const username = req.params.user || req.username;
         const profile = await Profile.findOne({ username });
         if (!profile) {
-            return res.status(404).send('用户不存在');
+            return res.status(404).send('User not found');
         }
         res.json({ username, email: profile.email || '' });
     });
@@ -27,7 +27,7 @@ module.exports = (app, { User, Profile }, { sessionUser, cookieKey }) => {
         const username = req.params.user || req.username;
         const profile = await Profile.findOne({ username });
         if (!profile) {
-            return res.status(404).send('用户不存在');
+            return res.status(404).send('User not found');
         }
         res.json({ username, phone: profile.phone || '' });
     });
@@ -80,12 +80,12 @@ module.exports = (app, { User, Profile }, { sessionUser, cookieKey }) => {
             const profile = await Profile.findOne({ username });
             
             if (!profile) {
-                return res.status(404).send('用户不存在');
+                return res.status(404).send('User not found');
             }
             
             res.json({ username, headline: profile.headline || '' });
         } catch (err) {
-            res.status(500).send(`获取 headline 失败: ${err.message}`);
+            res.status(500).send(`Failed to get headline: ${err.message}`);
         }
     });
 
@@ -101,7 +101,7 @@ module.exports = (app, { User, Profile }, { sessionUser, cookieKey }) => {
             
             res.json({ username: req.username, headline: profile.headline });
         } catch (err) {
-            res.status(500).send(`更新 headline 失败: ${err.message}`);
+            res.status(500).send(`Failed to update headline: ${err.message}`);
         }
     });
 };

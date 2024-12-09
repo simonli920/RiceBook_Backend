@@ -1,6 +1,7 @@
-# Backend Server for Assignment
+# Backend Server Information
 
 - **Test User**
+
   - Username: "joey"
   - Password: "pass"
 

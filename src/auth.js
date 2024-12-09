@@ -63,7 +63,7 @@ const setupAuthRoutes = async (app) => {
             // 检查用户是否已存在
             const existingUser = await User.findOne({ username });
             if (existingUser) {
-                return res.status(400).send('用户已存在');
+                return res.status(400).send('User already exists');
             }
 
             // 创建密码哈希
@@ -101,7 +101,7 @@ const setupAuthRoutes = async (app) => {
 
             res.status(200).json({ username, result: 'success' });
         } catch (err) {
-            res.status(500).send(`注册失败: ${err.message}`);
+            res.status(500).send(`Registration failed: ${err.message}`);
         }
     };
 
@@ -112,13 +112,13 @@ const setupAuthRoutes = async (app) => {
             // 查找用户
             const user = await User.findOne({ username });
             if (!user) {
-                return res.status(401).send('用户不存在');
+                return res.status(401).send('User does not exist');
             }
 
             // 验证密码
             const valid = await bcrypt.compare(password, user.hash);
             if (!valid) {
-                return res.status(401).send('密码错误');
+                return res.status(401).send('Incorrect password');
             }
 
             // 创建会话
@@ -135,7 +135,7 @@ const setupAuthRoutes = async (app) => {
 
             res.status(200).json({ username, result: 'success' });
         } catch (err) {
-            res.status(500).send(`登录失败: ${err.message}`);
+            res.status(500).send(`Login failed: ${err.message}`);
         }
     };
 
@@ -193,7 +193,7 @@ const setupAuthRoutes = async (app) => {
 
             res.status(200).json({ username: req.username, status: 'password updated' });
         } catch (err) {
-            res.status(500).send(`更新密码失败: ${err.message}`);
+            res.status(500).send(`Failed to update password: ${err.message}`);
         }
     };
 

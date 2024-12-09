@@ -7,10 +7,11 @@ const request = require('supertest');
 const express = require('express');
 const { MongoMemoryServer } = require('mongodb-memory-server');
 const mongoose = require('mongoose');
-const app = require('../index'); // 引入主应用程序
 const { User, Profile, Article } = require('./auth.js');
 const JasmineReporters = require('jasmine-reporters');
 const cors = require('cors');
+
+let app;
 
 app.use(cors({
     origin: [
@@ -38,7 +39,8 @@ describe('Backend API Tests', () => {
 
     beforeAll(async () => {
         // 等待应用初始化
-        await app;
+        const appModule = await require('../index');
+        app = appModule;
         
         // 启动内存中的 MongoDB
         mongoServer = await MongoMemoryServer.create();

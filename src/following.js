@@ -9,11 +9,11 @@ module.exports = (app, { Profile }, { sessionUser, cookieKey }) => {
             const username = req.params.user || req.username;
             const profile = await Profile.findOne({ username });
             if (!profile) {
-                return res.status(404).send('用户不存在');
+                return res.status(404).send('User not found');
             }
             res.json({ username, following: profile.following || [] });
         } catch (err) {
-            res.status(500).send(`获取关注列表失败: ${err.message}`);
+            res.status(500).send(`Failed to get following list: ${err.message}`);
         }
     });
 
@@ -21,7 +21,7 @@ module.exports = (app, { Profile }, { sessionUser, cookieKey }) => {
     app.put('/following/:user', isLoggedIn, async (req, res) => {
         try {
             const userToFollow = req.params.user;
-            
+
             // 检查要关注的用户是否存在
             const targetProfile = await Profile.findOne({ username: userToFollow });
             if (!targetProfile) {
@@ -45,7 +45,7 @@ module.exports = (app, { Profile }, { sessionUser, cookieKey }) => {
     app.delete('/following/:user', isLoggedIn, async (req, res) => {
         try {
             const userToUnfollow = req.params.user;
-            
+
             await Profile.findOneAndUpdate(
                 { username: req.username },
                 { $pull: { following: userToUnfollow } }
@@ -54,7 +54,7 @@ module.exports = (app, { Profile }, { sessionUser, cookieKey }) => {
             const updatedProfile = await Profile.findOne({ username: req.username });
             res.json({ username: req.username, following: updatedProfile.following });
         } catch (err) {
-            res.status(500).send(`取消关注失败: ${err.message}`);
+            res.status(500).send(`Failed to unfollow: ${err.message}`);
         }
     });
 };
