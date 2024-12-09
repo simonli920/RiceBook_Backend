@@ -9,6 +9,17 @@ const mongoose = require('mongoose');
 const app = require('../index'); // 引入主应用程序
 const { User, Profile, Article } = require('./auth.js');
 const JasmineReporters = require('jasmine-reporters');
+const cors = require('cors');
+
+app.use(cors({
+    origin: [
+        'http://localhost:3000',
+        'https://draft-backend-yl330.herokuapp.com'
+    ],
+    credentials: true,
+    methods: ['GET', 'POST', 'PUT', 'DELETE'],
+    allowedHeaders: ['Content-Type']
+}));
 
 // 添加 JUnit 报告器
 jasmine.getEnv().addReporter(
