@@ -57,6 +57,19 @@ async function initializeApp() {
         require('./src/profile.js')(app, models, session);
         require('./src/following.js')(app, models, session);
 
+        app.get('/', (req, res) => {
+            res.json({ 
+                message: 'Backend server is running',
+                endpoints: {
+                    register: 'POST /register',
+                    login: 'POST /login',
+                    logout: 'PUT /logout',
+                    articles: 'GET /articles',
+                    createArticle: 'POST /article'
+                }
+            });
+        });
+
         if (process.env.NODE_ENV !== 'test') {
             const port = process.env.PORT || 3000;
             app.listen(port, () => {
