@@ -15,11 +15,12 @@ app.use(cookieParser());
 app.use(cors({
     origin: [
         'http://localhost:3000',
-        'https://draft-backend-yl330.herokuapp.com'
+        'https://draft-backend-yl330.herokuapp.com',
+        'https://draft-backend-yl330-2f0e8c294959.herokuapp.com'
     ],
     credentials: true,
     methods: ['GET', 'POST', 'PUT', 'DELETE'],
-    allowedHeaders: ['Content-Type']
+    allowedHeaders: ['Content-Type', 'Authorization']
 }));
 
 // MongoDB connection URI
@@ -45,18 +46,6 @@ if (process.env.NODE_ENV !== 'test') {
 
 async function initializeApp() {
     try {
-        const authModule = require('./src/auth.js');
-        await authModule.setupAuthRoutes(app);
-
-        const { User, Profile, Article, sessionUser, cookieKey } = authModule;
-
-        const models = { User, Profile, Article };
-        const session = { sessionUser, cookieKey };
-
-        require('./src/articles.js')(app, models, session);
-        require('./src/profile.js')(app, models, session);
-        require('./src/following.js')(app, models, session);
-
         app.get('/', (req, res) => {
             res.json({ 
                 message: 'Backend server is running',
@@ -70,6 +59,18 @@ async function initializeApp() {
             });
         });
 
+        const authModule = require('./src/auth.js');
+        await authModule.setupAuthRoutes(app);
+
+        const { User, Profile, Article, sessionUser, cookieKey } = authModule;
+
+        const models = { User, Profile, Article };
+        const session = { sessionUser, cookieKey };
+
+        require('./src/articles.js')(app, models, session);
+        require('./src/profile.js')(app, models, session);
+        require('./src/following.js')(app, models, session);
+
         if (process.env.NODE_ENV !== 'test') {
             const port = process.env.PORT || 3000;
             app.listen(port, () => {
@@ -79,17 +80,18 @@ async function initializeApp() {
 
         return app;
     } catch (error) {
-        console.error('Application initialization error:', error);
-        throw error;
+        console.error('初始化失败:', error);
+        process.exit(1);
     }
 }
 
 // 导出初始化后的应用
-module.exports = (async () => {
-    try {
-        return await initializeApp();
-    } catch (err) {
-        console.error('Failed to initialize app:', err);
-        throw err;
-    }
-})();
+// module.exports = (async () => {
+//     try {
+//         return await initializeApp();
+//     } catch (err) {
+//         console.error('Failed to initialize app:', err);
+//         throw err;
+//     }
+// })();
+module.exports = initializeApp();
