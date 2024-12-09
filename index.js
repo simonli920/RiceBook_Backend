@@ -46,7 +46,7 @@ if (process.env.NODE_ENV !== 'test') {
 async function initializeApp() {
     try {
         app.get('/', (req, res) => {
-            res.json({ 
+            res.json({
                 message: 'Backend server is running',
                 endpoints: {
                     register: 'POST /register',
