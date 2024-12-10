@@ -23,9 +23,15 @@ app.use(cors({
 }));
 
 // MongoDB connection URI
-const dbUser = process.env.DB_USER || 'simonyh920';
-const dbPassword = process.env.DB_PASSWORD || 'shuai123';
+const dbUser = process.env.DB_USER;
+const dbPassword = process.env.DB_PASSWORD;
 const dbName = process.env.DB_NAME || 'mydb';
+
+// 检查是否已设置环境变量
+if (!dbUser || !dbPassword) {
+    console.error('数据库用户名或密码未设置！');
+    process.exit(1);
+}
 
 const dbUrl = process.env.MONGODB_URI || `mongodb+srv://${dbUser}:${encodeURIComponent(dbPassword)}@cluster0.xiz8l.mongodb.net/${dbName}?retryWrites=true&w=majority&appName=Cluster0`;
 
