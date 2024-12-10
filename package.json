@@ -12,16 +12,17 @@
   "license": "ISC",
   "description": "",
   "dependencies": {
-    "express": "^4.21.1",
+    "bcrypt": "^5.1.1",
     "body-parser": "^1.20.3",
     "cookie-parser": "^1.4.7",
     "cors": "^2.8.5",
-    "bcrypt": "^5.1.1",
-    "mongoose": "^8.8.4",
+    "dotenv": "^16.4.7",
+    "express": "^4.21.1",
+    "get-intrinsic": "1.2.0",
+    "gopd": "1.0.1",
     "md5": "^2.3.0",
     "mongodb": "^6.11.0",
-    "get-intrinsic": "1.2.0",
-    "gopd": "1.0.1"
+    "mongoose": "^8.8.4"
   },
   "devDependencies": {
     "jasmine": "^5.5.0",
