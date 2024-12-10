@@ -27,5 +27,8 @@
     "jasmine-reporters": "^2.5.2",
     "mongodb-memory-server": "^8.16.1",
     "supertest": "^7.0.0"
+  },
+  "engines": {
+    "node": "16.x"
   }
 }
