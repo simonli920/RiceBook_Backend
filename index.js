@@ -15,7 +15,7 @@ app.use(cookieParser());
 app.use(cors({
     origin: [
         'http://localhost:3000',
-        'https://hw6-backend-yl330-e6e49efe2a78.herokuapp.com'
+        'https://d-backend-e2d47c6a3db5.herokuapp.com'
     ],
     credentials: true,
     methods: ['GET', 'POST', 'PUT', 'DELETE'],
