@@ -6,4 +6,8 @@
   - Password: "pass"
 
 - **Backend URL**
-  - https://draft-backend-yl330.herokuapp.com
+
+  - https://hw6-backend-yl330-e6e49efe2a78.herokuapp.com
+
+- **Procfile**
+  - web: node index.js
