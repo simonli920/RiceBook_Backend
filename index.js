@@ -7,6 +7,7 @@ const bodyParser = require('body-parser');
 const cookieParser = require('cookie-parser');
 const mongoose = require('mongoose');
 const cors = require('cors');
+const session = require('express-session');
 
 // Initialize the app
 const app = express();
@@ -17,11 +18,22 @@ app.use(cookieParser());
 app.use(cors({
     origin: [
         'http://localhost:3000',
-        'https://d-backend-e2d47c6a3db5.herokuapp.com'
+        'https://d-backend-e2d47c6a3db5.herokuapp.com',
+        'https://womanly-shake-frontend.surge.sh'
     ],
     credentials: true,
     methods: ['GET', 'POST', 'PUT', 'DELETE'],
     allowedHeaders: ['Content-Type', 'Authorization']
+}));
+
+app.use(session({
+    secret: 'your-secret-key',
+    resave: false,
+    saveUninitialized: false,
+    cookie: {
+        secure: process.env.NODE_ENV === 'production',
+        sameSite: 'None'
+    }
 }));
 
 // MongoDB connection URI

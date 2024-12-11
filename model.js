@@ -6,6 +6,17 @@ const mongoose = require('mongoose');
 const userSchema = new mongoose.Schema({
     username: { type: String, unique: true },
     hash: String, // Password hash
+    oauth: {
+        google: {
+            id: String,
+            displayName: String
+        },
+        // 可以添加其他第三方认证
+        facebook: {
+            id: String,
+            displayName: String
+        }
+    }
 });
 
 const User = mongoose.model('User', userSchema);
@@ -36,6 +47,7 @@ const articleSchema = new mongoose.Schema({
     pid: Number,
     author: String,
     text: String,
+    image: String,
     date: Date,
     comments: [commentSchema],
 });

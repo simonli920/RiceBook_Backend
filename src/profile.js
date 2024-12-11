@@ -2,6 +2,7 @@
 
 module.exports = (app, { User, Profile }, { sessionUser, cookieKey }) => {
     const isLoggedIn = require('./auth.js').isLoggedIn;
+    const { upload } = require('./multer.js');
 
     // Email endpoints
     app.get('/email/:user?', isLoggedIn, async (req, res) => {
@@ -61,10 +62,14 @@ module.exports = (app, { User, Profile }, { sessionUser, cookieKey }) => {
         res.json({ avatar: profile.avatar || '' });
     });
 
-    app.put('/avatar', isLoggedIn, async (req, res) => {
-        const { avatar } = req.body;
-        await Profile.findOneAndUpdate({ username: req.username }, { avatar });
-        res.json({ avatar });
+    app.put('/avatar', isLoggedIn, upload.single('avatar'), async (req, res) => {
+        try {
+            const avatarUrl = req.file.path;
+            await Profile.findOneAndUpdate({ username: req.username }, { avatar: avatarUrl });
+            res.json({ username: req.username, avatar: avatarUrl });
+        } catch (err) {
+            res.status(500).send(`Failed to update avatar: ${err.message}`);
+        }
     });
 
     // DOB endpoint

@@ -2,6 +2,9 @@
 
 const bcrypt = require('bcrypt');
 const mongoose = require('mongoose');
+const passport = require('passport');
+const GoogleStrategy = require('passport-google-oauth20').Strategy;
+const cors = require('cors');
 
 // Session handling
 const sessionUser = {}; // Session store
@@ -10,7 +13,13 @@ const cookieKey = 'sid'; // Session cookie key
 // User Schema and Model
 const userSchema = new mongoose.Schema({
     username: String,
-    hash: String
+    hash: String,
+    oauth: {
+        google: {
+            id: String,
+            displayName: String
+        }
+    }
 });
 
 const User = mongoose.model('User', userSchema);
@@ -197,6 +206,117 @@ const setupAuthRoutes = async (app) => {
         }
     };
 
+    // 配置 Passport 序列化和反序列化用户
+    passport.serializeUser((user, done) => {
+        done(null, user.id);
+    });
+
+    passport.deserializeUser(async (id, done) => {
+        try {
+            const user = await User.findById(id);
+            done(null, user);
+        } catch (err) {
+            done(err, null);
+        }
+    });
+
+    // 配置 Google Strategy
+    passport.use(new GoogleStrategy({
+        clientID: process.env.GOOGLE_CLIENT_ID,
+        clientSecret: process.env.GOOGLE_CLIENT_SECRET,
+        callbackURL: process.env.GOOGLE_CALLBACK_URL,
+        proxy: true
+    },
+    async (accessToken, refreshToken, profile, done) => {
+        try {
+            // 在数据库中查找用户
+            let user = await User.findOne({ 'oauth.google.id': profile.id });
+
+            if (!user) {
+                // 如果用户不存在，创建新用户
+                user = new User({
+                    username: `google_${profile.id}`,
+                    oauth: {
+                        google: {
+                            id: profile.id,
+                            displayName: profile.displayName
+                        }
+                    }
+                });
+                await user.save();
+
+                // 创建用户的 Profile
+                const newProfile = new Profile({
+                    username: user.username,
+                    // 可以根据需要添加更多字段
+                });
+                await newProfile.save();
+            }
+            return done(null, user);
+        } catch (err) {
+            return done(err, null);
+        }
+    }));
+
+    // 处理账户关联
+    app.post('/link/google', isLoggedIn, passport.authenticate('google-link'));
+
+    passport.use('google-link', new GoogleStrategy({
+        clientID: process.env.GOOGLE_CLIENT_ID,
+        clientSecret: process.env.GOOGLE_CLIENT_SECRET,
+        callbackURL: process.env.GOOGLE_CALLBACK_URL,
+        passReqToCallback: true
+    }, async (req, accessToken, refreshToken, profile, done) => {
+        try {
+            const user = await User.findOne({ username: req.username });
+            if (!user) {
+                return done(null, false, { message: 'User not found' });
+            }
+            
+            if (user.oauth && user.oauth.google) {
+                return done(null, user, { message: 'Account already linked' });
+            }
+            
+            user.oauth = user.oauth || {};
+            user.oauth.google = {
+                id: profile.id,
+                displayName: profile.displayName
+            };
+            await user.save();
+            return done(null, user);
+        } catch (err) {
+            return done(err, null);
+        }
+    }));
+
+    // 处理账户解绑
+    app.post('/unlink/google', isLoggedIn, async (req, res) => {
+        const user = await User.findOne({ username: req.username });
+        if (user && user.oauth && user.oauth.google) {
+            delete user.oauth.google;
+            await user.save();
+            res.status(200).send('Google account unlinked');
+        } else {
+            res.status(400).send('No Google account linked');
+        }
+    });
+
+    // 初始化 Passport 中间件
+    app.use(passport.initialize());
+    app.use(passport.session());
+
+    // Google OAuth 路由
+    app.get('/auth/google',
+        passport.authenticate('google', { scope: ['profile', 'email'] })
+    );
+
+    app.get('/auth/google/callback',
+        passport.authenticate('google', { 
+            failureRedirect: 'https://womanly-shake-frontend.surge.sh/login',
+            successRedirect: 'https://womanly-shake-frontend.surge.sh'
+        })
+    );
+
     // 设置路由
     app.post('/register', register);
     app.post('/login', login);
@@ -240,3 +360,4 @@ module.exports = {
     sessionUser,
     cookieKey
 };
+
