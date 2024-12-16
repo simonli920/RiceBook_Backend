@@ -1,0 +1,111 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<testsuites name="jest tests" tests="49" failures="0" errors="0" time="2.074">
+  <testsuite name="Upload Routes" errors="0" failures="0" skipped="0" timestamp="2024-12-16T04:08:24" time="1.317" tests="7">
+    <testcase classname="Upload Routes POST /upload/image should upload an image successfully" name="Upload Routes POST /upload/image should upload an image successfully" time="0.077">
+    </testcase>
+    <testcase classname="Upload Routes POST /upload/image should return 400 if no image is provided" name="Upload Routes POST /upload/image should return 400 if no image is provided" time="0.059">
+    </testcase>
+    <testcase classname="Upload Routes POST /upload/image should return 401 if user is not logged in" name="Upload Routes POST /upload/image should return 401 if user is not logged in" time="0.059">
+    </testcase>
+    <testcase classname="Upload Routes POST /upload/avatar should upload an avatar successfully" name="Upload Routes POST /upload/avatar should upload an avatar successfully" time="0.066">
+    </testcase>
+    <testcase classname="Upload Routes POST /upload/avatar should return 400 if no avatar is provided" name="Upload Routes POST /upload/avatar should return 400 if no avatar is provided" time="0.059">
+    </testcase>
+    <testcase classname="Upload Routes POST /upload/avatar should return 401 if user is not logged in" name="Upload Routes POST /upload/avatar should return 401 if user is not logged in" time="0.057">
+    </testcase>
+    <testcase classname="Upload Routes POST /upload/avatar should update existing profile with new avatar" name="Upload Routes POST /upload/avatar should update existing profile with new avatar" time="0.062">
+    </testcase>
+  </testsuite>
+  <testsuite name="Article Routes" errors="0" failures="0" skipped="0" timestamp="2024-12-16T04:08:24" time="1.606" tests="9">
+    <testcase classname="Article Routes GET /articles should get articles with pagination" name="Article Routes GET /articles should get articles with pagination" time="0.1">
+    </testcase>
+    <testcase classname="Article Routes GET /articles should get articles for user and following" name="Article Routes GET /articles should get articles for user and following" time="0.12">
+    </testcase>
+    <testcase classname="Article Routes GET /articles/:id should get a single article" name="Article Routes GET /articles/:id should get a single article" time="0.059">
+    </testcase>
+    <testcase classname="Article Routes GET /articles/:id should return 404 for non-existent article" name="Article Routes GET /articles/:id should return 404 for non-existent article" time="0.059">
+    </testcase>
+    <testcase classname="Article Routes POST /articles should create a new article" name="Article Routes POST /articles should create a new article" time="0.064">
+    </testcase>
+    <testcase classname="Article Routes PUT /articles/:id should update an article" name="Article Routes PUT /articles/:id should update an article" time="0.063">
+    </testcase>
+    <testcase classname="Article Routes PUT /articles/:id should not update article of different user" name="Article Routes PUT /articles/:id should not update article of different user" time="0.114">
+    </testcase>
+    <testcase classname="Article Routes POST /articles/:id/comments should add a comment to an article" name="Article Routes POST /articles/:id/comments should add a comment to an article" time="0.063">
+    </testcase>
+    <testcase classname="Article Routes POST /articles/:id/comments should return 404 for non-existent article" name="Article Routes POST /articles/:id/comments should return 404 for non-existent article" time="0.06">
+    </testcase>
+  </testsuite>
+  <testsuite name="Authentication Routes" errors="0" failures="0" skipped="0" timestamp="2024-12-16T04:08:24" time="1.745" tests="8">
+    <testcase classname="Authentication Routes POST /auth/register should register a new user successfully" name="Authentication Routes POST /auth/register should register a new user successfully" time="0.093">
+    </testcase>
+    <testcase classname="Authentication Routes POST /auth/register should not register user with existing username" name="Authentication Routes POST /auth/register should not register user with existing username" time="0.061">
+    </testcase>
+    <testcase classname="Authentication Routes POST /auth/login should login successfully with correct credentials" name="Authentication Routes POST /auth/login should login successfully with correct credentials" time="0.112">
+    </testcase>
+    <testcase classname="Authentication Routes POST /auth/login should fail with incorrect password" name="Authentication Routes POST /auth/login should fail with incorrect password" time="0.113">
+    </testcase>
+    <testcase classname="Authentication Routes POST /auth/login should fail with non-existent username" name="Authentication Routes POST /auth/login should fail with non-existent username" time="0.059">
+    </testcase>
+    <testcase classname="Authentication Routes PUT /auth/logout should logout successfully" name="Authentication Routes PUT /auth/logout should logout successfully" time="0.058">
+    </testcase>
+    <testcase classname="Authentication Routes PUT /auth/password should update password successfully" name="Authentication Routes PUT /auth/password should update password successfully" time="0.224">
+    </testcase>
+    <testcase classname="Authentication Routes PUT /auth/password should fail with incorrect old password" name="Authentication Routes PUT /auth/password should fail with incorrect old password" time="0.113">
+    </testcase>
+  </testsuite>
+  <testsuite name="Profile Routes" errors="0" failures="0" skipped="0" timestamp="2024-12-16T04:08:24" time="1.866" tests="16">
+    <testcase classname="Profile Routes GET /profile/headline/:user? should get own headline" name="Profile Routes GET /profile/headline/:user? should get own headline" time="0.079">
+    </testcase>
+    <testcase classname="Profile Routes GET /profile/headline/:user? should get another user&apos;s headline" name="Profile Routes GET /profile/headline/:user? should get another user&apos;s headline" time="0.06">
+    </testcase>
+    <testcase classname="Profile Routes PUT /profile/headline should update headline" name="Profile Routes PUT /profile/headline should update headline" time="0.065">
+    </testcase>
+    <testcase classname="Profile Routes GET /profile/email/:user? should get own email" name="Profile Routes GET /profile/email/:user? should get own email" time="0.059">
+    </testcase>
+    <testcase classname="Profile Routes GET /profile/email/:user? should get another user&apos;s email" name="Profile Routes GET /profile/email/:user? should get another user&apos;s email" time="0.059">
+    </testcase>
+    <testcase classname="Profile Routes PUT /profile/email should update email" name="Profile Routes PUT /profile/email should update email" time="0.06">
+    </testcase>
+    <testcase classname="Profile Routes GET /profile/zipcode/:user? should get own zipcode" name="Profile Routes GET /profile/zipcode/:user? should get own zipcode" time="0.059">
+    </testcase>
+    <testcase classname="Profile Routes GET /profile/zipcode/:user? should get another user&apos;s zipcode" name="Profile Routes GET /profile/zipcode/:user? should get another user&apos;s zipcode" time="0.058">
+    </testcase>
+    <testcase classname="Profile Routes PUT /profile/zipcode should update zipcode" name="Profile Routes PUT /profile/zipcode should update zipcode" time="0.061">
+    </testcase>
+    <testcase classname="Profile Routes GET /profile/phone/:user? should get own phone" name="Profile Routes GET /profile/phone/:user? should get own phone" time="0.058">
+    </testcase>
+    <testcase classname="Profile Routes GET /profile/phone/:user? should get another user&apos;s phone" name="Profile Routes GET /profile/phone/:user? should get another user&apos;s phone" time="0.057">
+    </testcase>
+    <testcase classname="Profile Routes PUT /profile/phone should update phone" name="Profile Routes PUT /profile/phone should update phone" time="0.06">
+    </testcase>
+    <testcase classname="Profile Routes GET /profile/dob should get own date of birth" name="Profile Routes GET /profile/dob should get own date of birth" time="0.057">
+    </testcase>
+    <testcase classname="Profile Routes GET /profile/avatar/:user? should get own avatar" name="Profile Routes GET /profile/avatar/:user? should get own avatar" time="0.057">
+    </testcase>
+    <testcase classname="Profile Routes GET /profile/avatar/:user? should get another user&apos;s avatar" name="Profile Routes GET /profile/avatar/:user? should get another user&apos;s avatar" time="0.058">
+    </testcase>
+    <testcase classname="Profile Routes PUT /profile/avatar should update avatar" name="Profile Routes PUT /profile/avatar should update avatar" time="0.059">
+    </testcase>
+  </testsuite>
+  <testsuite name="Following Routes" errors="0" failures="0" skipped="0" timestamp="2024-12-16T04:08:24" time="1.971" tests="9">
+    <testcase classname="Following Routes GET /following/:user? should get empty following list initially" name="Following Routes GET /following/:user? should get empty following list initially" time="0.137">
+    </testcase>
+    <testcase classname="Following Routes GET /following/:user? should get following list with followed users" name="Following Routes GET /following/:user? should get following list with followed users" time="0.122">
+    </testcase>
+    <testcase classname="Following Routes GET /following/:user? should get another user&apos;s following list" name="Following Routes GET /following/:user? should get another user&apos;s following list" time="0.115">
+    </testcase>
+    <testcase classname="Following Routes PUT /following/:username should add user to following list" name="Following Routes PUT /following/:username should add user to following list" time="0.117">
+    </testcase>
+    <testcase classname="Following Routes PUT /following/:username should not add non-existent user" name="Following Routes PUT /following/:username should not add non-existent user" time="0.115">
+    </testcase>
+    <testcase classname="Following Routes PUT /following/:username should not add already followed user" name="Following Routes PUT /following/:username should not add already followed user" time="0.117">
+    </testcase>
+    <testcase classname="Following Routes DELETE /following/:username should remove user from following list" name="Following Routes DELETE /following/:username should remove user from following list" time="0.117">
+    </testcase>
+    <testcase classname="Following Routes DELETE /following/:username should not remove non-existent user" name="Following Routes DELETE /following/:username should not remove non-existent user" time="0.114">
+    </testcase>
+    <testcase classname="Following Routes DELETE /following/:username should not remove user not in following list" name="Following Routes DELETE /following/:username should not remove user not in following list" time="0.115">
+    </testcase>
+  </testsuite>
+</testsuites>

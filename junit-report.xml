@@ -1,33 +1,351 @@
-<?xml version="1.0" encoding="UTF-8"  ?>
-<testsuites disabled="0" errors="0" failures="0" tests="22" time="0.845">
- <testsuite name="Backend API Tests" timestamp="2024-12-08T18:49:27" hostname="localhost" time="0.606" errors="0" tests="9" skipped="0" disabled="0" failures="0">
-  <testcase classname="Backend API Tests" name="should register a new user" time="0.085" />
-  <testcase classname="Backend API Tests" name="should log in as the new user" time="0.056" />
-  <testcase classname="Backend API Tests" name="should create a new article and verify it was added" time="0.003" />
-  <testcase classname="Backend API Tests" name="should update the headline and verify the change" time="0.003" />
-  <testcase classname="Backend API Tests" name="should log out the user" time="0.002" />
-  <testcase classname="Backend API Tests" name="should not allow access to protected routes after logout" time="0.001" />
-  <testcase classname="Backend API Tests" name="should retrieve an article by PID" time="0.056" />
-  <testcase classname="Backend API Tests" name="should return 404 when requesting a non-existent article PID" time="0.001" />
-  <testcase classname="Backend API Tests" name="should add a comment to an article" time="0.055" />
- </testsuite>
- <testsuite name="New Sample Test Suite" timestamp="2024-12-08T18:49:27" hostname="localhost" time="0" errors="0" tests="1" skipped="0" disabled="0" failures="0">
-  <testcase classname="New Sample Test Suite" name="should pass another simple test" time="0" />
- </testsuite>
- <testsuite name="Profile API Tests" timestamp="2024-12-08T18:49:27" hostname="localhost" time="0.239" errors="0" tests="11" skipped="0" disabled="0" failures="0">
-  <testcase classname="Profile API Tests" name="should get the profile headline" time="0.002" />
-  <testcase classname="Profile API Tests" name="should update the profile headline" time="0.002" />
-  <testcase classname="Profile API Tests" name="should get the email address" time="0.001" />
-  <testcase classname="Profile API Tests" name="should update the email address" time="0.002" />
-  <testcase classname="Profile API Tests" name="should get the zipcode" time="0.001" />
-  <testcase classname="Profile API Tests" name="should update the zipcode" time="0.001" />
-  <testcase classname="Profile API Tests" name="should get the phone number" time="0.001" />
-  <testcase classname="Profile API Tests" name="should update the phone number" time="0.002" />
-  <testcase classname="Profile API Tests" name="should get the date of birth" time="0.001" />
-  <testcase classname="Profile API Tests" name="should get the avatar" time="0.001" />
-  <testcase classname="Profile API Tests" name="should update the avatar" time="0.001" />
- </testsuite>
- <testsuite name="Sample Test Suite" timestamp="2024-12-08T18:49:27" hostname="localhost" time="0" errors="0" tests="1" skipped="0" disabled="0" failures="0">
-  <testcase classname="Sample Test Suite" name="should pass a simple test" time="0" />
- </testsuite>
+<?xml version="1.0" encoding="UTF-8"?>
+<testsuites name="jest tests" tests="49" failures="48" errors="0" time="2.246">
+  <testsuite name="Upload Routes" errors="0" failures="7" skipped="0" timestamp="2024-12-16T04:33:35" time="1.639" tests="7">
+    <testcase classname="Upload Routes › POST /upload/image" name="should upload an image successfully" time="0.066">
+      <failure>ValidationError: Profile validation failed: username: Path `username` is required.
+    at model.Object.&lt;anonymous&gt;.Document.invalidate (/Users/liyihong/Desktop/RICE/531_Comp/Homework/HW_6/node_modules/mongoose/lib/document.js:3327:32)
+    at /Users/liyihong/Desktop/RICE/531_Comp/Homework/HW_6/node_modules/mongoose/lib/document.js:3088:17
+    at /Users/liyihong/Desktop/RICE/531_Comp/Homework/HW_6/node_modules/mongoose/lib/schemaType.js:1407:9
+    at processTicksAndRejections (node:internal/process/task_queues:85:11)</failure>
+    </testcase>
+    <testcase classname="Upload Routes › POST /upload/image" name="should return 400 if no image is provided" time="0.057">
+      <failure>ValidationError: Profile validation failed: username: Path `username` is required.
+    at model.Object.&lt;anonymous&gt;.Document.invalidate (/Users/liyihong/Desktop/RICE/531_Comp/Homework/HW_6/node_modules/mongoose/lib/document.js:3327:32)
+    at /Users/liyihong/Desktop/RICE/531_Comp/Homework/HW_6/node_modules/mongoose/lib/document.js:3088:17
+    at /Users/liyihong/Desktop/RICE/531_Comp/Homework/HW_6/node_modules/mongoose/lib/schemaType.js:1407:9
+    at processTicksAndRejections (node:internal/process/task_queues:85:11)</failure>
+    </testcase>
+    <testcase classname="Upload Routes › POST /upload/image" name="should return 401 if user is not logged in" time="0.055">
+      <failure>ValidationError: Profile validation failed: username: Path `username` is required.
+    at model.Object.&lt;anonymous&gt;.Document.invalidate (/Users/liyihong/Desktop/RICE/531_Comp/Homework/HW_6/node_modules/mongoose/lib/document.js:3327:32)
+    at /Users/liyihong/Desktop/RICE/531_Comp/Homework/HW_6/node_modules/mongoose/lib/document.js:3088:17
+    at /Users/liyihong/Desktop/RICE/531_Comp/Homework/HW_6/node_modules/mongoose/lib/schemaType.js:1407:9
+    at processTicksAndRejections (node:internal/process/task_queues:85:11)</failure>
+    </testcase>
+    <testcase classname="Upload Routes › POST /upload/avatar" name="should upload an avatar successfully" time="0.056">
+      <failure>ValidationError: Profile validation failed: username: Path `username` is required.
+    at model.Object.&lt;anonymous&gt;.Document.invalidate (/Users/liyihong/Desktop/RICE/531_Comp/Homework/HW_6/node_modules/mongoose/lib/document.js:3327:32)
+    at /Users/liyihong/Desktop/RICE/531_Comp/Homework/HW_6/node_modules/mongoose/lib/document.js:3088:17
+    at /Users/liyihong/Desktop/RICE/531_Comp/Homework/HW_6/node_modules/mongoose/lib/schemaType.js:1407:9
+    at processTicksAndRejections (node:internal/process/task_queues:85:11)</failure>
+    </testcase>
+    <testcase classname="Upload Routes › POST /upload/avatar" name="should return 400 if no avatar is provided" time="0.056">
+      <failure>ValidationError: Profile validation failed: username: Path `username` is required.
+    at model.Object.&lt;anonymous&gt;.Document.invalidate (/Users/liyihong/Desktop/RICE/531_Comp/Homework/HW_6/node_modules/mongoose/lib/document.js:3327:32)
+    at /Users/liyihong/Desktop/RICE/531_Comp/Homework/HW_6/node_modules/mongoose/lib/document.js:3088:17
+    at /Users/liyihong/Desktop/RICE/531_Comp/Homework/HW_6/node_modules/mongoose/lib/schemaType.js:1407:9
+    at processTicksAndRejections (node:internal/process/task_queues:85:11)</failure>
+    </testcase>
+    <testcase classname="Upload Routes › POST /upload/avatar" name="should return 401 if user is not logged in" time="0.056">
+      <failure>ValidationError: Profile validation failed: username: Path `username` is required.
+    at model.Object.&lt;anonymous&gt;.Document.invalidate (/Users/liyihong/Desktop/RICE/531_Comp/Homework/HW_6/node_modules/mongoose/lib/document.js:3327:32)
+    at /Users/liyihong/Desktop/RICE/531_Comp/Homework/HW_6/node_modules/mongoose/lib/document.js:3088:17
+    at /Users/liyihong/Desktop/RICE/531_Comp/Homework/HW_6/node_modules/mongoose/lib/schemaType.js:1407:9
+    at processTicksAndRejections (node:internal/process/task_queues:85:11)</failure>
+    </testcase>
+    <testcase classname="Upload Routes › POST /upload/avatar" name="should update existing profile with new avatar" time="0.056">
+      <failure>ValidationError: Profile validation failed: username: Path `username` is required.
+    at model.Object.&lt;anonymous&gt;.Document.invalidate (/Users/liyihong/Desktop/RICE/531_Comp/Homework/HW_6/node_modules/mongoose/lib/document.js:3327:32)
+    at /Users/liyihong/Desktop/RICE/531_Comp/Homework/HW_6/node_modules/mongoose/lib/document.js:3088:17
+    at /Users/liyihong/Desktop/RICE/531_Comp/Homework/HW_6/node_modules/mongoose/lib/schemaType.js:1407:9
+    at processTicksAndRejections (node:internal/process/task_queues:85:11)</failure>
+    </testcase>
+  </testsuite>
+  <testsuite name="Authentication Routes" errors="0" failures="7" skipped="0" timestamp="2024-12-16T04:33:35" time="1.721" tests="8">
+    <testcase classname="Authentication Routes › POST /auth/register" name="should register a new user successfully" time="0.092">
+    </testcase>
+    <testcase classname="Authentication Routes › POST /auth/register" name="should not register user with existing username" time="0.056">
+      <failure>ValidationError: Profile validation failed: username: Path `username` is required.
+    at model.Object.&lt;anonymous&gt;.Document.invalidate (/Users/liyihong/Desktop/RICE/531_Comp/Homework/HW_6/node_modules/mongoose/lib/document.js:3327:32)
+    at /Users/liyihong/Desktop/RICE/531_Comp/Homework/HW_6/node_modules/mongoose/lib/document.js:3088:17
+    at /Users/liyihong/Desktop/RICE/531_Comp/Homework/HW_6/node_modules/mongoose/lib/schemaType.js:1407:9
+    at processTicksAndRejections (node:internal/process/task_queues:85:11)</failure>
+    </testcase>
+    <testcase classname="Authentication Routes › POST /auth/login" name="should login successfully with correct credentials" time="0.055">
+      <failure>ValidationError: Profile validation failed: username: Path `username` is required.
+    at model.Object.&lt;anonymous&gt;.Document.invalidate (/Users/liyihong/Desktop/RICE/531_Comp/Homework/HW_6/node_modules/mongoose/lib/document.js:3327:32)
+    at /Users/liyihong/Desktop/RICE/531_Comp/Homework/HW_6/node_modules/mongoose/lib/document.js:3088:17
+    at /Users/liyihong/Desktop/RICE/531_Comp/Homework/HW_6/node_modules/mongoose/lib/schemaType.js:1407:9
+    at processTicksAndRejections (node:internal/process/task_queues:85:11)</failure>
+    </testcase>
+    <testcase classname="Authentication Routes › POST /auth/login" name="should fail with incorrect password" time="0.056">
+      <failure>ValidationError: Profile validation failed: username: Path `username` is required.
+    at model.Object.&lt;anonymous&gt;.Document.invalidate (/Users/liyihong/Desktop/RICE/531_Comp/Homework/HW_6/node_modules/mongoose/lib/document.js:3327:32)
+    at /Users/liyihong/Desktop/RICE/531_Comp/Homework/HW_6/node_modules/mongoose/lib/document.js:3088:17
+    at /Users/liyihong/Desktop/RICE/531_Comp/Homework/HW_6/node_modules/mongoose/lib/schemaType.js:1407:9
+    at processTicksAndRejections (node:internal/process/task_queues:85:11)</failure>
+    </testcase>
+    <testcase classname="Authentication Routes › POST /auth/login" name="should fail with non-existent username" time="0.056">
+      <failure>ValidationError: Profile validation failed: username: Path `username` is required.
+    at model.Object.&lt;anonymous&gt;.Document.invalidate (/Users/liyihong/Desktop/RICE/531_Comp/Homework/HW_6/node_modules/mongoose/lib/document.js:3327:32)
+    at /Users/liyihong/Desktop/RICE/531_Comp/Homework/HW_6/node_modules/mongoose/lib/document.js:3088:17
+    at /Users/liyihong/Desktop/RICE/531_Comp/Homework/HW_6/node_modules/mongoose/lib/schemaType.js:1407:9
+    at processTicksAndRejections (node:internal/process/task_queues:85:11)</failure>
+    </testcase>
+    <testcase classname="Authentication Routes › PUT /auth/logout" name="should logout successfully" time="0.055">
+      <failure>ValidationError: Profile validation failed: username: Path `username` is required.
+    at model.Object.&lt;anonymous&gt;.Document.invalidate (/Users/liyihong/Desktop/RICE/531_Comp/Homework/HW_6/node_modules/mongoose/lib/document.js:3327:32)
+    at /Users/liyihong/Desktop/RICE/531_Comp/Homework/HW_6/node_modules/mongoose/lib/document.js:3088:17
+    at /Users/liyihong/Desktop/RICE/531_Comp/Homework/HW_6/node_modules/mongoose/lib/schemaType.js:1407:9
+    at processTicksAndRejections (node:internal/process/task_queues:85:11)</failure>
+    </testcase>
+    <testcase classname="Authentication Routes › PUT /auth/password" name="should update password successfully" time="0.056">
+      <failure>ValidationError: Profile validation failed: username: Path `username` is required.
+    at model.Object.&lt;anonymous&gt;.Document.invalidate (/Users/liyihong/Desktop/RICE/531_Comp/Homework/HW_6/node_modules/mongoose/lib/document.js:3327:32)
+    at /Users/liyihong/Desktop/RICE/531_Comp/Homework/HW_6/node_modules/mongoose/lib/document.js:3088:17
+    at /Users/liyihong/Desktop/RICE/531_Comp/Homework/HW_6/node_modules/mongoose/lib/schemaType.js:1407:9
+    at processTicksAndRejections (node:internal/process/task_queues:85:11)</failure>
+    </testcase>
+    <testcase classname="Authentication Routes › PUT /auth/password" name="should fail with incorrect old password" time="0.056">
+      <failure>ValidationError: Profile validation failed: username: Path `username` is required.
+    at model.Object.&lt;anonymous&gt;.Document.invalidate (/Users/liyihong/Desktop/RICE/531_Comp/Homework/HW_6/node_modules/mongoose/lib/document.js:3327:32)
+    at /Users/liyihong/Desktop/RICE/531_Comp/Homework/HW_6/node_modules/mongoose/lib/document.js:3088:17
+    at /Users/liyihong/Desktop/RICE/531_Comp/Homework/HW_6/node_modules/mongoose/lib/schemaType.js:1407:9
+    at processTicksAndRejections (node:internal/process/task_queues:85:11)</failure>
+    </testcase>
+  </testsuite>
+  <testsuite name="Article Routes" errors="0" failures="9" skipped="0" timestamp="2024-12-16T04:33:35" time="1.769" tests="9">
+    <testcase classname="Article Routes › GET /articles" name="should get articles with pagination" time="0.067">
+      <failure>ValidationError: Profile validation failed: username: Path `username` is required.
+    at model.Object.&lt;anonymous&gt;.Document.invalidate (/Users/liyihong/Desktop/RICE/531_Comp/Homework/HW_6/node_modules/mongoose/lib/document.js:3327:32)
+    at /Users/liyihong/Desktop/RICE/531_Comp/Homework/HW_6/node_modules/mongoose/lib/document.js:3088:17
+    at /Users/liyihong/Desktop/RICE/531_Comp/Homework/HW_6/node_modules/mongoose/lib/schemaType.js:1407:9
+    at processTicksAndRejections (node:internal/process/task_queues:85:11)</failure>
+    </testcase>
+    <testcase classname="Article Routes › GET /articles" name="should get articles for user and following" time="0.056">
+      <failure>ValidationError: Profile validation failed: username: Path `username` is required.
+    at model.Object.&lt;anonymous&gt;.Document.invalidate (/Users/liyihong/Desktop/RICE/531_Comp/Homework/HW_6/node_modules/mongoose/lib/document.js:3327:32)
+    at /Users/liyihong/Desktop/RICE/531_Comp/Homework/HW_6/node_modules/mongoose/lib/document.js:3088:17
+    at /Users/liyihong/Desktop/RICE/531_Comp/Homework/HW_6/node_modules/mongoose/lib/schemaType.js:1407:9
+    at processTicksAndRejections (node:internal/process/task_queues:85:11)</failure>
+    </testcase>
+    <testcase classname="Article Routes › GET /articles/:id" name="should get a single article" time="0.057">
+      <failure>ValidationError: Profile validation failed: username: Path `username` is required.
+    at model.Object.&lt;anonymous&gt;.Document.invalidate (/Users/liyihong/Desktop/RICE/531_Comp/Homework/HW_6/node_modules/mongoose/lib/document.js:3327:32)
+    at /Users/liyihong/Desktop/RICE/531_Comp/Homework/HW_6/node_modules/mongoose/lib/document.js:3088:17
+    at /Users/liyihong/Desktop/RICE/531_Comp/Homework/HW_6/node_modules/mongoose/lib/schemaType.js:1407:9
+    at processTicksAndRejections (node:internal/process/task_queues:85:11)</failure>
+    </testcase>
+    <testcase classname="Article Routes › GET /articles/:id" name="should return 404 for non-existent article" time="0.056">
+      <failure>ValidationError: Profile validation failed: username: Path `username` is required.
+    at model.Object.&lt;anonymous&gt;.Document.invalidate (/Users/liyihong/Desktop/RICE/531_Comp/Homework/HW_6/node_modules/mongoose/lib/document.js:3327:32)
+    at /Users/liyihong/Desktop/RICE/531_Comp/Homework/HW_6/node_modules/mongoose/lib/document.js:3088:17
+    at /Users/liyihong/Desktop/RICE/531_Comp/Homework/HW_6/node_modules/mongoose/lib/schemaType.js:1407:9
+    at processTicksAndRejections (node:internal/process/task_queues:85:11)</failure>
+    </testcase>
+    <testcase classname="Article Routes › POST /articles" name="should create a new article" time="0.056">
+      <failure>ValidationError: Profile validation failed: username: Path `username` is required.
+    at model.Object.&lt;anonymous&gt;.Document.invalidate (/Users/liyihong/Desktop/RICE/531_Comp/Homework/HW_6/node_modules/mongoose/lib/document.js:3327:32)
+    at /Users/liyihong/Desktop/RICE/531_Comp/Homework/HW_6/node_modules/mongoose/lib/document.js:3088:17
+    at /Users/liyihong/Desktop/RICE/531_Comp/Homework/HW_6/node_modules/mongoose/lib/schemaType.js:1407:9
+    at processTicksAndRejections (node:internal/process/task_queues:85:11)</failure>
+    </testcase>
+    <testcase classname="Article Routes › PUT /articles/:id" name="should update an article" time="0.056">
+      <failure>ValidationError: Profile validation failed: username: Path `username` is required.
+    at model.Object.&lt;anonymous&gt;.Document.invalidate (/Users/liyihong/Desktop/RICE/531_Comp/Homework/HW_6/node_modules/mongoose/lib/document.js:3327:32)
+    at /Users/liyihong/Desktop/RICE/531_Comp/Homework/HW_6/node_modules/mongoose/lib/document.js:3088:17
+    at /Users/liyihong/Desktop/RICE/531_Comp/Homework/HW_6/node_modules/mongoose/lib/schemaType.js:1407:9
+    at processTicksAndRejections (node:internal/process/task_queues:85:11)</failure>
+    </testcase>
+    <testcase classname="Article Routes › PUT /articles/:id" name="should not update article of different user" time="0.056">
+      <failure>ValidationError: Profile validation failed: username: Path `username` is required.
+    at model.Object.&lt;anonymous&gt;.Document.invalidate (/Users/liyihong/Desktop/RICE/531_Comp/Homework/HW_6/node_modules/mongoose/lib/document.js:3327:32)
+    at /Users/liyihong/Desktop/RICE/531_Comp/Homework/HW_6/node_modules/mongoose/lib/document.js:3088:17
+    at /Users/liyihong/Desktop/RICE/531_Comp/Homework/HW_6/node_modules/mongoose/lib/schemaType.js:1407:9
+    at processTicksAndRejections (node:internal/process/task_queues:85:11)</failure>
+    </testcase>
+    <testcase classname="Article Routes › POST /articles/:id/comments" name="should add a comment to an article" time="0.056">
+      <failure>ValidationError: Profile validation failed: username: Path `username` is required.
+    at model.Object.&lt;anonymous&gt;.Document.invalidate (/Users/liyihong/Desktop/RICE/531_Comp/Homework/HW_6/node_modules/mongoose/lib/document.js:3327:32)
+    at /Users/liyihong/Desktop/RICE/531_Comp/Homework/HW_6/node_modules/mongoose/lib/document.js:3088:17
+    at /Users/liyihong/Desktop/RICE/531_Comp/Homework/HW_6/node_modules/mongoose/lib/schemaType.js:1407:9
+    at processTicksAndRejections (node:internal/process/task_queues:85:11)</failure>
+    </testcase>
+    <testcase classname="Article Routes › POST /articles/:id/comments" name="should return 404 for non-existent article" time="0.057">
+      <failure>ValidationError: Profile validation failed: username: Path `username` is required.
+    at model.Object.&lt;anonymous&gt;.Document.invalidate (/Users/liyihong/Desktop/RICE/531_Comp/Homework/HW_6/node_modules/mongoose/lib/document.js:3327:32)
+    at /Users/liyihong/Desktop/RICE/531_Comp/Homework/HW_6/node_modules/mongoose/lib/document.js:3088:17
+    at /Users/liyihong/Desktop/RICE/531_Comp/Homework/HW_6/node_modules/mongoose/lib/schemaType.js:1407:9
+    at processTicksAndRejections (node:internal/process/task_queues:85:11)</failure>
+    </testcase>
+  </testsuite>
+  <testsuite name="Following Routes" errors="0" failures="9" skipped="0" timestamp="2024-12-16T04:33:35" time="1.769" tests="9">
+    <testcase classname="Following Routes › GET /following/:user?" name="should get empty following list initially" time="0.066">
+      <failure>ValidationError: Profile validation failed: username: Path `username` is required.
+    at model.Object.&lt;anonymous&gt;.Document.invalidate (/Users/liyihong/Desktop/RICE/531_Comp/Homework/HW_6/node_modules/mongoose/lib/document.js:3327:32)
+    at /Users/liyihong/Desktop/RICE/531_Comp/Homework/HW_6/node_modules/mongoose/lib/document.js:3088:17
+    at /Users/liyihong/Desktop/RICE/531_Comp/Homework/HW_6/node_modules/mongoose/lib/schemaType.js:1407:9
+    at processTicksAndRejections (node:internal/process/task_queues:85:11)</failure>
+    </testcase>
+    <testcase classname="Following Routes › GET /following/:user?" name="should get following list with followed users" time="0.057">
+      <failure>ValidationError: Profile validation failed: username: Path `username` is required.
+    at model.Object.&lt;anonymous&gt;.Document.invalidate (/Users/liyihong/Desktop/RICE/531_Comp/Homework/HW_6/node_modules/mongoose/lib/document.js:3327:32)
+    at /Users/liyihong/Desktop/RICE/531_Comp/Homework/HW_6/node_modules/mongoose/lib/document.js:3088:17
+    at /Users/liyihong/Desktop/RICE/531_Comp/Homework/HW_6/node_modules/mongoose/lib/schemaType.js:1407:9
+    at processTicksAndRejections (node:internal/process/task_queues:85:11)</failure>
+    </testcase>
+    <testcase classname="Following Routes › GET /following/:user?" name="should get another user&apos;s following list" time="0.056">
+      <failure>ValidationError: Profile validation failed: username: Path `username` is required.
+    at model.Object.&lt;anonymous&gt;.Document.invalidate (/Users/liyihong/Desktop/RICE/531_Comp/Homework/HW_6/node_modules/mongoose/lib/document.js:3327:32)
+    at /Users/liyihong/Desktop/RICE/531_Comp/Homework/HW_6/node_modules/mongoose/lib/document.js:3088:17
+    at /Users/liyihong/Desktop/RICE/531_Comp/Homework/HW_6/node_modules/mongoose/lib/schemaType.js:1407:9
+    at processTicksAndRejections (node:internal/process/task_queues:85:11)</failure>
+    </testcase>
+    <testcase classname="Following Routes › PUT /following/:username" name="should add user to following list" time="0.056">
+      <failure>ValidationError: Profile validation failed: username: Path `username` is required.
+    at model.Object.&lt;anonymous&gt;.Document.invalidate (/Users/liyihong/Desktop/RICE/531_Comp/Homework/HW_6/node_modules/mongoose/lib/document.js:3327:32)
+    at /Users/liyihong/Desktop/RICE/531_Comp/Homework/HW_6/node_modules/mongoose/lib/document.js:3088:17
+    at /Users/liyihong/Desktop/RICE/531_Comp/Homework/HW_6/node_modules/mongoose/lib/schemaType.js:1407:9
+    at processTicksAndRejections (node:internal/process/task_queues:85:11)</failure>
+    </testcase>
+    <testcase classname="Following Routes › PUT /following/:username" name="should not add non-existent user" time="0.056">
+      <failure>ValidationError: Profile validation failed: username: Path `username` is required.
+    at model.Object.&lt;anonymous&gt;.Document.invalidate (/Users/liyihong/Desktop/RICE/531_Comp/Homework/HW_6/node_modules/mongoose/lib/document.js:3327:32)
+    at /Users/liyihong/Desktop/RICE/531_Comp/Homework/HW_6/node_modules/mongoose/lib/document.js:3088:17
+    at /Users/liyihong/Desktop/RICE/531_Comp/Homework/HW_6/node_modules/mongoose/lib/schemaType.js:1407:9
+    at processTicksAndRejections (node:internal/process/task_queues:85:11)</failure>
+    </testcase>
+    <testcase classname="Following Routes › PUT /following/:username" name="should not add already followed user" time="0.056">
+      <failure>ValidationError: Profile validation failed: username: Path `username` is required.
+    at model.Object.&lt;anonymous&gt;.Document.invalidate (/Users/liyihong/Desktop/RICE/531_Comp/Homework/HW_6/node_modules/mongoose/lib/document.js:3327:32)
+    at /Users/liyihong/Desktop/RICE/531_Comp/Homework/HW_6/node_modules/mongoose/lib/document.js:3088:17
+    at /Users/liyihong/Desktop/RICE/531_Comp/Homework/HW_6/node_modules/mongoose/lib/schemaType.js:1407:9
+    at processTicksAndRejections (node:internal/process/task_queues:85:11)</failure>
+    </testcase>
+    <testcase classname="Following Routes › DELETE /following/:username" name="should remove user from following list" time="0.054">
+      <failure>ValidationError: Profile validation failed: username: Path `username` is required.
+    at model.Object.&lt;anonymous&gt;.Document.invalidate (/Users/liyihong/Desktop/RICE/531_Comp/Homework/HW_6/node_modules/mongoose/lib/document.js:3327:32)
+    at /Users/liyihong/Desktop/RICE/531_Comp/Homework/HW_6/node_modules/mongoose/lib/document.js:3088:17
+    at /Users/liyihong/Desktop/RICE/531_Comp/Homework/HW_6/node_modules/mongoose/lib/schemaType.js:1407:9
+    at processTicksAndRejections (node:internal/process/task_queues:85:11)</failure>
+    </testcase>
+    <testcase classname="Following Routes › DELETE /following/:username" name="should not remove non-existent user" time="0.055">
+      <failure>ValidationError: Profile validation failed: username: Path `username` is required.
+    at model.Object.&lt;anonymous&gt;.Document.invalidate (/Users/liyihong/Desktop/RICE/531_Comp/Homework/HW_6/node_modules/mongoose/lib/document.js:3327:32)
+    at /Users/liyihong/Desktop/RICE/531_Comp/Homework/HW_6/node_modules/mongoose/lib/document.js:3088:17
+    at /Users/liyihong/Desktop/RICE/531_Comp/Homework/HW_6/node_modules/mongoose/lib/schemaType.js:1407:9
+    at processTicksAndRejections (node:internal/process/task_queues:85:11)</failure>
+    </testcase>
+    <testcase classname="Following Routes › DELETE /following/:username" name="should not remove user not in following list" time="0.057">
+      <failure>ValidationError: Profile validation failed: username: Path `username` is required.
+    at model.Object.&lt;anonymous&gt;.Document.invalidate (/Users/liyihong/Desktop/RICE/531_Comp/Homework/HW_6/node_modules/mongoose/lib/document.js:3327:32)
+    at /Users/liyihong/Desktop/RICE/531_Comp/Homework/HW_6/node_modules/mongoose/lib/document.js:3088:17
+    at /Users/liyihong/Desktop/RICE/531_Comp/Homework/HW_6/node_modules/mongoose/lib/schemaType.js:1407:9
+    at processTicksAndRejections (node:internal/process/task_queues:85:11)</failure>
+    </testcase>
+  </testsuite>
+  <testsuite name="Profile Routes" errors="0" failures="16" skipped="0" timestamp="2024-12-16T04:33:35" time="2.134" tests="16">
+    <testcase classname="Profile Routes › GET /profile/headline/:user?" name="should get own headline" time="0.066">
+      <failure>ValidationError: Profile validation failed: username: Path `username` is required.
+    at model.Object.&lt;anonymous&gt;.Document.invalidate (/Users/liyihong/Desktop/RICE/531_Comp/Homework/HW_6/node_modules/mongoose/lib/document.js:3327:32)
+    at /Users/liyihong/Desktop/RICE/531_Comp/Homework/HW_6/node_modules/mongoose/lib/document.js:3088:17
+    at /Users/liyihong/Desktop/RICE/531_Comp/Homework/HW_6/node_modules/mongoose/lib/schemaType.js:1407:9
+    at processTicksAndRejections (node:internal/process/task_queues:85:11)</failure>
+    </testcase>
+    <testcase classname="Profile Routes › GET /profile/headline/:user?" name="should get another user&apos;s headline" time="0.056">
+      <failure>ValidationError: Profile validation failed: username: Path `username` is required.
+    at model.Object.&lt;anonymous&gt;.Document.invalidate (/Users/liyihong/Desktop/RICE/531_Comp/Homework/HW_6/node_modules/mongoose/lib/document.js:3327:32)
+    at /Users/liyihong/Desktop/RICE/531_Comp/Homework/HW_6/node_modules/mongoose/lib/document.js:3088:17
+    at /Users/liyihong/Desktop/RICE/531_Comp/Homework/HW_6/node_modules/mongoose/lib/schemaType.js:1407:9
+    at processTicksAndRejections (node:internal/process/task_queues:85:11)</failure>
+    </testcase>
+    <testcase classname="Profile Routes › PUT /profile/headline" name="should update headline" time="0.055">
+      <failure>ValidationError: Profile validation failed: username: Path `username` is required.
+    at model.Object.&lt;anonymous&gt;.Document.invalidate (/Users/liyihong/Desktop/RICE/531_Comp/Homework/HW_6/node_modules/mongoose/lib/document.js:3327:32)
+    at /Users/liyihong/Desktop/RICE/531_Comp/Homework/HW_6/node_modules/mongoose/lib/document.js:3088:17
+    at /Users/liyihong/Desktop/RICE/531_Comp/Homework/HW_6/node_modules/mongoose/lib/schemaType.js:1407:9
+    at processTicksAndRejections (node:internal/process/task_queues:85:11)</failure>
+    </testcase>
+    <testcase classname="Profile Routes › GET /profile/email/:user?" name="should get own email" time="0.055">
+      <failure>ValidationError: Profile validation failed: username: Path `username` is required.
+    at model.Object.&lt;anonymous&gt;.Document.invalidate (/Users/liyihong/Desktop/RICE/531_Comp/Homework/HW_6/node_modules/mongoose/lib/document.js:3327:32)
+    at /Users/liyihong/Desktop/RICE/531_Comp/Homework/HW_6/node_modules/mongoose/lib/document.js:3088:17
+    at /Users/liyihong/Desktop/RICE/531_Comp/Homework/HW_6/node_modules/mongoose/lib/schemaType.js:1407:9
+    at processTicksAndRejections (node:internal/process/task_queues:85:11)</failure>
+    </testcase>
+    <testcase classname="Profile Routes › GET /profile/email/:user?" name="should get another user&apos;s email" time="0.057">
+      <failure>ValidationError: Profile validation failed: username: Path `username` is required.
+    at model.Object.&lt;anonymous&gt;.Document.invalidate (/Users/liyihong/Desktop/RICE/531_Comp/Homework/HW_6/node_modules/mongoose/lib/document.js:3327:32)
+    at /Users/liyihong/Desktop/RICE/531_Comp/Homework/HW_6/node_modules/mongoose/lib/document.js:3088:17
+    at /Users/liyihong/Desktop/RICE/531_Comp/Homework/HW_6/node_modules/mongoose/lib/schemaType.js:1407:9
+    at processTicksAndRejections (node:internal/process/task_queues:85:11)</failure>
+    </testcase>
+    <testcase classname="Profile Routes › PUT /profile/email" name="should update email" time="0.057">
+      <failure>ValidationError: Profile validation failed: username: Path `username` is required.
+    at model.Object.&lt;anonymous&gt;.Document.invalidate (/Users/liyihong/Desktop/RICE/531_Comp/Homework/HW_6/node_modules/mongoose/lib/document.js:3327:32)
+    at /Users/liyihong/Desktop/RICE/531_Comp/Homework/HW_6/node_modules/mongoose/lib/document.js:3088:17
+    at /Users/liyihong/Desktop/RICE/531_Comp/Homework/HW_6/node_modules/mongoose/lib/schemaType.js:1407:9
+    at processTicksAndRejections (node:internal/process/task_queues:85:11)</failure>
+    </testcase>
+    <testcase classname="Profile Routes › GET /profile/zipcode/:user?" name="should get own zipcode" time="0.056">
+      <failure>ValidationError: Profile validation failed: username: Path `username` is required.
+    at model.Object.&lt;anonymous&gt;.Document.invalidate (/Users/liyihong/Desktop/RICE/531_Comp/Homework/HW_6/node_modules/mongoose/lib/document.js:3327:32)
+    at /Users/liyihong/Desktop/RICE/531_Comp/Homework/HW_6/node_modules/mongoose/lib/document.js:3088:17
+    at /Users/liyihong/Desktop/RICE/531_Comp/Homework/HW_6/node_modules/mongoose/lib/schemaType.js:1407:9
+    at processTicksAndRejections (node:internal/process/task_queues:85:11)</failure>
+    </testcase>
+    <testcase classname="Profile Routes › GET /profile/zipcode/:user?" name="should get another user&apos;s zipcode" time="0.056">
+      <failure>ValidationError: Profile validation failed: username: Path `username` is required.
+    at model.Object.&lt;anonymous&gt;.Document.invalidate (/Users/liyihong/Desktop/RICE/531_Comp/Homework/HW_6/node_modules/mongoose/lib/document.js:3327:32)
+    at /Users/liyihong/Desktop/RICE/531_Comp/Homework/HW_6/node_modules/mongoose/lib/document.js:3088:17
+    at /Users/liyihong/Desktop/RICE/531_Comp/Homework/HW_6/node_modules/mongoose/lib/schemaType.js:1407:9
+    at processTicksAndRejections (node:internal/process/task_queues:85:11)</failure>
+    </testcase>
+    <testcase classname="Profile Routes › PUT /profile/zipcode" name="should update zipcode" time="0.057">
+      <failure>ValidationError: Profile validation failed: username: Path `username` is required.
+    at model.Object.&lt;anonymous&gt;.Document.invalidate (/Users/liyihong/Desktop/RICE/531_Comp/Homework/HW_6/node_modules/mongoose/lib/document.js:3327:32)
+    at /Users/liyihong/Desktop/RICE/531_Comp/Homework/HW_6/node_modules/mongoose/lib/document.js:3088:17
+    at /Users/liyihong/Desktop/RICE/531_Comp/Homework/HW_6/node_modules/mongoose/lib/schemaType.js:1407:9
+    at processTicksAndRejections (node:internal/process/task_queues:85:11)</failure>
+    </testcase>
+    <testcase classname="Profile Routes › GET /profile/phone/:user?" name="should get own phone" time="0.056">
+      <failure>ValidationError: Profile validation failed: username: Path `username` is required.
+    at model.Object.&lt;anonymous&gt;.Document.invalidate (/Users/liyihong/Desktop/RICE/531_Comp/Homework/HW_6/node_modules/mongoose/lib/document.js:3327:32)
+    at /Users/liyihong/Desktop/RICE/531_Comp/Homework/HW_6/node_modules/mongoose/lib/document.js:3088:17
+    at /Users/liyihong/Desktop/RICE/531_Comp/Homework/HW_6/node_modules/mongoose/lib/schemaType.js:1407:9
+    at processTicksAndRejections (node:internal/process/task_queues:85:11)</failure>
+    </testcase>
+    <testcase classname="Profile Routes › GET /profile/phone/:user?" name="should get another user&apos;s phone" time="0.052">
+      <failure>ValidationError: Profile validation failed: username: Path `username` is required.
+    at model.Object.&lt;anonymous&gt;.Document.invalidate (/Users/liyihong/Desktop/RICE/531_Comp/Homework/HW_6/node_modules/mongoose/lib/document.js:3327:32)
+    at /Users/liyihong/Desktop/RICE/531_Comp/Homework/HW_6/node_modules/mongoose/lib/document.js:3088:17
+    at /Users/liyihong/Desktop/RICE/531_Comp/Homework/HW_6/node_modules/mongoose/lib/schemaType.js:1407:9
+    at processTicksAndRejections (node:internal/process/task_queues:85:11)</failure>
+    </testcase>
+    <testcase classname="Profile Routes › PUT /profile/phone" name="should update phone" time="0.052">
+      <failure>ValidationError: Profile validation failed: username: Path `username` is required.
+    at model.Object.&lt;anonymous&gt;.Document.invalidate (/Users/liyihong/Desktop/RICE/531_Comp/Homework/HW_6/node_modules/mongoose/lib/document.js:3327:32)
+    at /Users/liyihong/Desktop/RICE/531_Comp/Homework/HW_6/node_modules/mongoose/lib/document.js:3088:17
+    at /Users/liyihong/Desktop/RICE/531_Comp/Homework/HW_6/node_modules/mongoose/lib/schemaType.js:1407:9
+    at processTicksAndRejections (node:internal/process/task_queues:85:11)</failure>
+    </testcase>
+    <testcase classname="Profile Routes › GET /profile/dob" name="should get own date of birth" time="0.052">
+      <failure>ValidationError: Profile validation failed: username: Path `username` is required.
+    at model.Object.&lt;anonymous&gt;.Document.invalidate (/Users/liyihong/Desktop/RICE/531_Comp/Homework/HW_6/node_modules/mongoose/lib/document.js:3327:32)
+    at /Users/liyihong/Desktop/RICE/531_Comp/Homework/HW_6/node_modules/mongoose/lib/document.js:3088:17
+    at /Users/liyihong/Desktop/RICE/531_Comp/Homework/HW_6/node_modules/mongoose/lib/schemaType.js:1407:9
+    at processTicksAndRejections (node:internal/process/task_queues:85:11)</failure>
+    </testcase>
+    <testcase classname="Profile Routes › GET /profile/avatar/:user?" name="should get own avatar" time="0.052">
+      <failure>ValidationError: Profile validation failed: username: Path `username` is required.
+    at model.Object.&lt;anonymous&gt;.Document.invalidate (/Users/liyihong/Desktop/RICE/531_Comp/Homework/HW_6/node_modules/mongoose/lib/document.js:3327:32)
+    at /Users/liyihong/Desktop/RICE/531_Comp/Homework/HW_6/node_modules/mongoose/lib/document.js:3088:17
+    at /Users/liyihong/Desktop/RICE/531_Comp/Homework/HW_6/node_modules/mongoose/lib/schemaType.js:1407:9
+    at processTicksAndRejections (node:internal/process/task_queues:85:11)</failure>
+    </testcase>
+    <testcase classname="Profile Routes › GET /profile/avatar/:user?" name="should get another user&apos;s avatar" time="0.052">
+      <failure>ValidationError: Profile validation failed: username: Path `username` is required.
+    at model.Object.&lt;anonymous&gt;.Document.invalidate (/Users/liyihong/Desktop/RICE/531_Comp/Homework/HW_6/node_modules/mongoose/lib/document.js:3327:32)
+    at /Users/liyihong/Desktop/RICE/531_Comp/Homework/HW_6/node_modules/mongoose/lib/document.js:3088:17
+    at /Users/liyihong/Desktop/RICE/531_Comp/Homework/HW_6/node_modules/mongoose/lib/schemaType.js:1407:9
+    at processTicksAndRejections (node:internal/process/task_queues:85:11)</failure>
+    </testcase>
+    <testcase classname="Profile Routes › PUT /profile/avatar" name="should update avatar" time="0.053">
+      <failure>ValidationError: Profile validation failed: username: Path `username` is required.
+    at model.Object.&lt;anonymous&gt;.Document.invalidate (/Users/liyihong/Desktop/RICE/531_Comp/Homework/HW_6/node_modules/mongoose/lib/document.js:3327:32)
+    at /Users/liyihong/Desktop/RICE/531_Comp/Homework/HW_6/node_modules/mongoose/lib/document.js:3088:17
+    at /Users/liyihong/Desktop/RICE/531_Comp/Homework/HW_6/node_modules/mongoose/lib/schemaType.js:1407:9
+    at processTicksAndRejections (node:internal/process/task_queues:85:11)</failure>
+    </testcase>
+  </testsuite>
 </testsuites>
