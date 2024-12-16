@@ -1,26 +1,9 @@
 const express = require('express');
 const router = express.Router();
 const multer = require('multer');
-const { cloudinary } = require('../config/cloudinary');
+const { upload, uploadToCloudinary } = require('../config/cloudinary');
 const { isLoggedIn } = require('../utils/middleware');
 const Profile = require('../models/Profile');
-
-// Configure multer for memory storage
-const storage = multer.memoryStorage();
-const upload = multer({
-    storage: storage,
-    limits: {
-        fileSize: 5 * 1024 * 1024 // 5MB limit
-    },
-    fileFilter: (req, file, cb) => {
-        // Check file type
-        if (!file.mimetype.startsWith('image/')) {
-            cb(new Error('Only image files are allowed!'), false);
-            return;
-        }
-        cb(null, true);
-    }
-});
 
 // Handle upload errors
 const handleUploadError = (error, req, res, next) => {
@@ -49,24 +32,6 @@ const handleUploadError = (error, req, res, next) => {
     next(error);
 };
 
-// Upload image to Cloudinary
-const uploadToCloudinary = async (buffer) => {
-    return new Promise((resolve, reject) => {
-        const uploadStream = cloudinary.uploader.upload_stream(
-            {
-                folder: 'ricebook',
-                transformation: [{ width: 1024, height: 1024, crop: 'limit' }]
-            },
-            (error, result) => {
-                if (error) reject(error);
-                else resolve(result);
-            }
-        );
-
-        uploadStream.end(buffer);
-    });
-};
-
 // Upload single image
 router.post('/image', isLoggedIn, upload.single('image'), async (req, res, next) => {
     try {
@@ -79,7 +44,8 @@ router.post('/image', isLoggedIn, upload.single('image'), async (req, res, next)
             });
         }
 
-        const result = await uploadToCloudinary(req.file.buffer);
+        // Upload to Cloudinary
+        const result = await uploadToCloudinary(req.file);
         console.log('Image upload successful:', result);
 
         res.json({
@@ -89,11 +55,19 @@ router.post('/image', isLoggedIn, upload.single('image'), async (req, res, next)
                 url: result.secure_url,
                 filename: req.file.originalname,
                 mimetype: req.file.mimetype,
-                size: req.file.size
+                size: req.file.size,
+                public_id: result.public_id
             }
         });
     } catch (error) {
         console.error('Image upload error:', error);
+        if (error.http_code) {
+            return res.status(error.http_code).json({
+                success: false,
+                message: 'Cloudinary upload failed',
+                error: error.message
+            });
+        }
         next(error);
     }
 });
@@ -110,7 +84,8 @@ router.post('/avatar', isLoggedIn, upload.single('avatar'), async (req, res, nex
             });
         }
 
-        const result = await uploadToCloudinary(req.file.buffer);
+        // Upload to Cloudinary
+        const result = await uploadToCloudinary(req.file);
         console.log('Avatar upload successful:', result);
 
         // Update user profile with new avatar URL
@@ -134,11 +109,19 @@ router.post('/avatar', isLoggedIn, upload.single('avatar'), async (req, res, nex
                 avatar: result.secure_url,
                 filename: req.file.originalname,
                 mimetype: req.file.mimetype,
-                size: req.file.size
+                size: req.file.size,
+                public_id: result.public_id
             }
         });
     } catch (error) {
         console.error('Avatar upload error:', error);
+        if (error.http_code) {
+            return res.status(error.http_code).json({
+                success: false,
+                message: 'Cloudinary upload failed',
+                error: error.message
+            });
+        }
         next(error);
     }
 });
