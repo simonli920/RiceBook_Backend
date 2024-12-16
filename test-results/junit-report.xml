@@ -1,48 +1,60 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<testsuites name="jest tests" tests="46" failures="2" errors="0" time="1.946">
-  <testsuite name="tests/upload.test.js" errors="0" failures="2" skipped="0" timestamp="2024-12-16T04:52:26" time="1.117" tests="4">
-    <testcase classname="Upload Routes › POST /upload/image" name="should upload an image successfully" time="0.078">
+<testsuites name="jest tests" tests="46" failures="4" errors="0" time="2.499">
+  <testsuite name="tests/upload.test.js" errors="0" failures="4" skipped="0" timestamp="2024-12-16T05:18:56" time="1.59" tests="4">
+    <testcase classname="上传路由测试 › POST /upload/image" name="应该成功上传图片" time="0.097">
       <failure>Error: expect(received).toBe(expected) // Object.is equality
 
-Expected: &quot;https://res.cloudinary.com/demo/image/upload/test.jpg&quot;
-Received: undefined
-    at Object.toBe (/Users/liyihong/Desktop/RICE/531_Comp/Homework/HW_6/tests/upload.test.js:59:44)
+Expected: 200
+Received: 500
+    at Object.toBe (/Users/liyihong/Desktop/RICE/531_Comp/Homework/HW_6/tests/upload.test.js:57:37)
     at processTicksAndRejections (node:internal/process/task_queues:105:5)</failure>
     </testcase>
-    <testcase classname="Upload Routes › POST /upload/image" name="should handle missing image file" time="0.06">
+    <testcase classname="上传路由测试 › POST /upload/image" name="应该处理缺少图片文件的情况" time="0.062">
+      <failure>Error: expect(received).toContain(expected) // indexOf
+
+Expected substring: &quot;请选择要上传的图片&quot;
+Received string:    &quot;Please select an image to upload&quot;
+    at Object.toContain (/Users/liyihong/Desktop/RICE/531_Comp/Homework/HW_6/tests/upload.test.js:69:43)
+    at processTicksAndRejections (node:internal/process/task_queues:105:5)</failure>
     </testcase>
-    <testcase classname="Upload Routes › POST /upload/avatar" name="should upload an avatar and update profile" time="0.064">
+    <testcase classname="上传路由测试 › POST /upload/avatar" name="应该成功上传头像并更新档案" time="0.061">
       <failure>Error: expect(received).toBe(expected) // Object.is equality
 
-Expected: &quot;https://res.cloudinary.com/demo/image/upload/test.jpg&quot;
-Received: undefined
-    at Object.toBe (/Users/liyihong/Desktop/RICE/531_Comp/Homework/HW_6/tests/upload.test.js:78:42)
+Expected: 200
+Received: 500
+    at Object.toBe (/Users/liyihong/Desktop/RICE/531_Comp/Homework/HW_6/tests/upload.test.js:79:37)
     at processTicksAndRejections (node:internal/process/task_queues:105:5)</failure>
     </testcase>
-    <testcase classname="Upload Routes › POST /upload/avatar" name="should handle missing avatar file" time="0.058">
+    <testcase classname="上传路由测试 › POST /upload/avatar" name="应该处理缺少头像文件的情况" time="0.059">
+      <failure>Error: expect(received).toContain(expected) // indexOf
+
+Expected substring: &quot;请选择要上传的头像图片&quot;
+Received string:    &quot;Please select an avatar image to upload&quot;
+    at Object.toContain (/Users/liyihong/Desktop/RICE/531_Comp/Homework/HW_6/tests/upload.test.js:95:43)
+    at processTicksAndRejections (node:internal/process/task_queues:105:5)</failure>
     </testcase>
   </testsuite>
-  <testsuite name="tests/article.test.js" errors="0" failures="0" skipped="0" timestamp="2024-12-16T04:52:26" time="1.484" tests="9">
-    <testcase classname="Article Routes › GET /articles" name="should get articles with pagination" time="0.1">
+  <testsuite name="tests/article.test.js" errors="0" failures="0" skipped="0" timestamp="2024-12-16T05:18:56" time="2.026" tests="9">
+    <testcase classname="Article Routes › GET /articles" name="should get articles with pagination" time="0.105">
     </testcase>
-    <testcase classname="Article Routes › GET /articles" name="should get articles for user and following" time="0.121">
+    <testcase classname="Article Routes › GET /articles" name="should get articles for user and following" time="0.124">
     </testcase>
     <testcase classname="Article Routes › GET /articles/:id" name="should get a single article" time="0.062">
     </testcase>
-    <testcase classname="Article Routes › GET /articles/:id" name="should return 404 for non-existent article" time="0.059">
+    <testcase classname="Article Routes › GET /articles/:id" name="should return 404 for non-existent article" time="0.06">
     </testcase>
     <testcase classname="Article Routes › POST /articles" name="should create a new article" time="0.067">
     </testcase>
-    <testcase classname="Article Routes › PUT /articles/:id" name="should update an article" time="0.063">
+    <testcase classname="Article Routes › PUT /articles/:id" name="should update an article" time="0.062">
     </testcase>
     <testcase classname="Article Routes › PUT /articles/:id" name="should not update article of different user" time="0.114">
     </testcase>
-    <testcase classname="Article Routes › POST /articles/:id/comments" name="should add a comment to an article" time="0.065">
+    <testcase classname="Article Routes › POST /articles/:id/comments" name="should add a comment to an article" time="0.062">
     </testcase>
     <testcase classname="Article Routes › POST /articles/:id/comments" name="should return 404 for non-existent article" time="0.059">
     </testcase>
   </testsuite>
-  <testsuite name="tests/auth.test.js" errors="0" failures="0" skipped="0" timestamp="2024-12-16T04:52:26" time="1.612" tests="8">
+  <testsuite name="tests/auth.test.js" errors="0" failures="0" skipped="0" timestamp="2024-12-16T05:18:56" time="2.152" tests="8">
     <testcase classname="Authentication Routes › POST /auth/register" name="should register a new user successfully" time="0.093">
     </testcase>
     <testcase classname="Authentication Routes › POST /auth/register" name="should not register user with existing username" time="0.06">
@@ -55,19 +67,19 @@ Received: undefined
     </testcase>
     <testcase classname="Authentication Routes › PUT /auth/logout" name="should logout successfully" time="0.059">
     </testcase>
-    <testcase classname="Authentication Routes › PUT /auth/password" name="should update password successfully" time="0.226">
+    <testcase classname="Authentication Routes › PUT /auth/password" name="should update password successfully" time="0.225">
     </testcase>
-    <testcase classname="Authentication Routes › PUT /auth/password" name="should fail with incorrect old password" time="0.115">
+    <testcase classname="Authentication Routes › PUT /auth/password" name="should fail with incorrect old password" time="0.116">
     </testcase>
   </testsuite>
-  <testsuite name="tests/profile.test.js" errors="0" failures="0" skipped="0" timestamp="2024-12-16T04:52:26" time="1.777" tests="16">
-    <testcase classname="Profile Routes › GET /profiles/headline/:username?" name="should get own headline" time="0.081">
+  <testsuite name="tests/profile.test.js" errors="0" failures="0" skipped="0" timestamp="2024-12-16T05:18:56" time="2.307" tests="16">
+    <testcase classname="Profile Routes › GET /profiles/headline/:username?" name="should get own headline" time="0.08">
     </testcase>
     <testcase classname="Profile Routes › GET /profiles/headline/:username?" name="should get another user&apos;s headline" time="0.059">
     </testcase>
     <testcase classname="Profile Routes › PUT /profiles/headline" name="should update headline" time="0.089">
     </testcase>
-    <testcase classname="Profile Routes › GET /profiles/email/:username?" name="should get own email" time="0.059">
+    <testcase classname="Profile Routes › GET /profiles/email/:username?" name="should get own email" time="0.06">
     </testcase>
     <testcase classname="Profile Routes › GET /profiles/email/:username?" name="should get another user&apos;s email" time="0.061">
     </testcase>
@@ -75,7 +87,7 @@ Received: undefined
     </testcase>
     <testcase classname="Profile Routes › GET /profiles/zipcode/:username?" name="should get own zipcode" time="0.059">
     </testcase>
-    <testcase classname="Profile Routes › GET /profiles/zipcode/:username?" name="should get another user&apos;s zipcode" time="0.06">
+    <testcase classname="Profile Routes › GET /profiles/zipcode/:username?" name="should get another user&apos;s zipcode" time="0.059">
     </testcase>
     <testcase classname="Profile Routes › PUT /profiles/zipcode" name="should update zipcode" time="0.061">
     </testcase>
@@ -83,33 +95,33 @@ Received: undefined
     </testcase>
     <testcase classname="Profile Routes › GET /profiles/phone/:username?" name="should get another user&apos;s phone" time="0.057">
     </testcase>
-    <testcase classname="Profile Routes › PUT /profiles/phone" name="should update phone" time="0.059">
+    <testcase classname="Profile Routes › PUT /profiles/phone" name="should update phone" time="0.06">
     </testcase>
     <testcase classname="Profile Routes › GET /profiles/dob" name="should get own date of birth" time="0.058">
     </testcase>
     <testcase classname="Profile Routes › GET /profiles/avatar/:username?" name="should get own avatar" time="0.058">
     </testcase>
-    <testcase classname="Profile Routes › GET /profiles/avatar/:username?" name="should get another user&apos;s avatar" time="0.059">
+    <testcase classname="Profile Routes › GET /profiles/avatar/:username?" name="should get another user&apos;s avatar" time="0.058">
     </testcase>
-    <testcase classname="Profile Routes › PUT /profiles/avatar" name="should update avatar" time="0.057">
+    <testcase classname="Profile Routes › PUT /profiles/avatar" name="should update avatar" time="0.059">
     </testcase>
   </testsuite>
-  <testsuite name="tests/following.test.js" errors="0" failures="0" skipped="0" timestamp="2024-12-16T04:52:26" time="1.846" tests="9">
+  <testsuite name="tests/following.test.js" errors="0" failures="0" skipped="0" timestamp="2024-12-16T05:18:56" time="2.386" tests="9">
     <testcase classname="Following Routes › GET /following/:user?" name="should get empty following list initially" time="0.138">
     </testcase>
-    <testcase classname="Following Routes › GET /following/:user?" name="should get following list with followed users" time="0.123">
+    <testcase classname="Following Routes › GET /following/:user?" name="should get following list with followed users" time="0.124">
     </testcase>
-    <testcase classname="Following Routes › GET /following/:user?" name="should get another user&apos;s following list" time="0.116">
+    <testcase classname="Following Routes › GET /following/:user?" name="should get another user&apos;s following list" time="0.117">
     </testcase>
-    <testcase classname="Following Routes › PUT /following/:username" name="should add user to following list" time="0.119">
+    <testcase classname="Following Routes › PUT /following/:username" name="should add user to following list" time="0.118">
     </testcase>
-    <testcase classname="Following Routes › PUT /following/:username" name="should not add non-existent user" time="0.114">
+    <testcase classname="Following Routes › PUT /following/:username" name="should not add non-existent user" time="0.115">
     </testcase>
-    <testcase classname="Following Routes › PUT /following/:username" name="should not add already followed user" time="0.121">
+    <testcase classname="Following Routes › PUT /following/:username" name="should not add already followed user" time="0.119">
     </testcase>
     <testcase classname="Following Routes › DELETE /following/:username" name="should remove user from following list" time="0.117">
     </testcase>
-    <testcase classname="Following Routes › DELETE /following/:username" name="should not remove non-existent user" time="0.114">
+    <testcase classname="Following Routes › DELETE /following/:username" name="should not remove non-existent user" time="0.115">
     </testcase>
     <testcase classname="Following Routes › DELETE /following/:username" name="should not remove user not in following list" time="0.116">
     </testcase>

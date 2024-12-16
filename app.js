@@ -49,7 +49,7 @@ app.use(session({
 
 // 基础路由
 app.get('/', (req, res) => {
-    res.json({ message: 'Welcome to the Backend of RiceBook Social Media API' });
+    res.json({ message: 'Welcome to the Backend  of RiceBook Social Media API' });
 });
 
 // API 路由
@@ -66,7 +66,7 @@ app.use((req, res, next) => {
     next(error);
 });
 
-// 错误处理中间件
+// 全局错误处理中间件
 app.use((err, req, res, next) => {
     console.error('Error details:', {
         message: err.message,
@@ -74,7 +74,7 @@ app.use((err, req, res, next) => {
         status: err.status || 500
     });
 
-    // 如果是 Multer 错误
+    // Handle Multer errors
     if (err.name === 'MulterError') {
         return res.status(400).json({
             status: 'error',
@@ -83,7 +83,7 @@ app.use((err, req, res, next) => {
         });
     }
 
-    // 如果是 Cloudinary 错误
+    // Handle Cloudinary errors
     if (err.http_code) {
         return res.status(err.http_code).json({
             status: 'error',
@@ -92,10 +92,28 @@ app.use((err, req, res, next) => {
         });
     }
 
+    // Handle validation errors
+    if (err.name === 'ValidationError') {
+        return res.status(400).json({
+            status: 'error',
+            message: 'Validation error',
+            details: err.message
+        });
+    }
+
+    // Handle file type errors
+    if (err.message === 'Only image files are allowed!') {
+        return res.status(400).json({
+            status: 'error',
+            message: err.message
+        });
+    }
+
+    // Default error response
     res.status(err.status || 500).json({
         status: 'error',
-        message: process.env.NODE_ENV === 'development' ? err.message : 'Something went wrong!',
-        details: process.env.NODE_ENV === 'development' ? err.stack : undefined
+        message: process.env.NODE_ENV === 'development' ? err.message : 'Internal server error',
+        ...(process.env.NODE_ENV === 'development' && { stack: err.stack })
     });
 });
 
