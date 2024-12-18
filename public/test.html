@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Google Login Test</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+        .button {
+            display: inline-block;
+            background-color: #4285f4;
+            color: white;
+            padding: 10px 20px;
+            border-radius: 5px;
+            text-decoration: none;
+            margin: 10px;
+        }
+        .status {
+            margin-top: 20px;
+            padding: 20px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+        }
+    </style>
+</head>
+<body>
+    <h1>Google Login Test</h1>
+    
+    <div>
+        <a href="/auth/google" class="button">Sign in with Google</a>
+        <a href="/auth/test" class="button">Check Auth Status</a>
+        <a href="/auth/logout" class="button">Logout</a>
+    </div>
+
+    <div class="status" id="status">
+        Status will appear here...
+    </div>
+
+    <script>
+        document.querySelector('[href="/auth/test"]').addEventListener('click', async (e) => {
+            e.preventDefault();
+            try {
+                const response = await fetch('/auth/test');
+                const data = await response.json();
+                document.getElementById('status').innerHTML = '<pre>' + JSON.stringify(data, null, 2) + '</pre>';
+            } catch (error) {
+                document.getElementById('status').innerHTML = 'Error: ' + error.message;
+            }
+        });
+
+        document.querySelector('[href="/auth/logout"]').addEventListener('click', async (e) => {
+            e.preventDefault();
+            try {
+                const response = await fetch('/auth/logout', {
+                    method: 'PUT'
+                });
+                const data = await response.json();
+                document.getElementById('status').innerHTML = 'Logged out successfully';
+                setTimeout(() => window.location.reload(), 1000);
+            } catch (error) {
+                document.getElementById('status').innerHTML = 'Error logging out: ' + error.message;
+            }
+        });
+    </script>
+</body>
+</html> 

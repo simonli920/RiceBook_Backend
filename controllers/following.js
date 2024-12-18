@@ -1,4 +1,5 @@
 const Profile = require('../models/Profile');
+const User = require('../models/User');
 
 // 获取关注列表
 exports.getFollowing = async (req, res) => {
@@ -24,15 +25,15 @@ exports.addFollowing = async (req, res) => {
             return res.status(400).json({ message: 'Cannot follow yourself' });
         }
 
-        // 检查要关注的用户是否存在
-        const targetProfile = await Profile.findOne({ username: userToFollow });
-        if (!targetProfile) {
+        // 查找要关注的用户
+        const targetUser = await User.findOne({ username: userToFollow });
+        if (!targetUser) {
             return res.status(404).json({ message: 'User to follow does not exist' });
         }
 
         const currentProfile = await Profile.findOne({ username });
-        if (!currentProfile.following.includes(userToFollow)) {
-            currentProfile.following.push(userToFollow);
+        if (!currentProfile.following.includes(targetUser._id)) {
+            currentProfile.following.push(targetUser._id);
             await currentProfile.save();
         }
 
@@ -48,9 +49,17 @@ exports.removeFollowing = async (req, res) => {
         const userToUnfollow = req.params.user;
         const username = req.username;
 
+        // 查找要取消关注的用户
+        const targetUser = await User.findOne({ username: userToUnfollow });
+        if (!targetUser) {
+            return res.status(404).json({ message: 'User to unfollow does not exist' });
+        }
+
         const currentProfile = await Profile.findOne({ username });
-        if (currentProfile.following.includes(userToUnfollow)) {
-            currentProfile.following = currentProfile.following.filter(user => user !== userToUnfollow);
+        if (currentProfile.following.includes(targetUser._id)) {
+            currentProfile.following = currentProfile.following.filter(
+                id => id && id.toString() !== targetUser._id.toString()
+            );
             await currentProfile.save();
         } else {
             return res.status(400).json({ message: 'You are not following this user' });

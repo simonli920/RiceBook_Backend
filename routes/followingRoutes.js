@@ -10,7 +10,7 @@ router.get('/:user?', isLoggedIn, async (req, res) => {
         const userId = req.params.user || req.session.userId;
         const profile = await Profile.findOne({ user: userId })
             .populate('following', 'username');
-        
+
         if (!profile) {
             return res.status(404).json({ message: 'Profile not found' });
         }
@@ -28,13 +28,13 @@ router.get('/:user?', isLoggedIn, async (req, res) => {
 router.put('/:username', isLoggedIn, async (req, res) => {
     try {
         const userToFollow = await User.findOne({ username: req.params.username });
-        
+
         if (!userToFollow) {
             return res.status(404).json({ message: 'User not found' });
         }
 
         const profile = await Profile.findOne({ user: req.session.userId });
-        
+
         if (!profile) {
             return res.status(404).json({ message: 'Profile not found' });
         }
@@ -64,13 +64,13 @@ router.put('/:username', isLoggedIn, async (req, res) => {
 router.delete('/:username', isLoggedIn, async (req, res) => {
     try {
         const userToUnfollow = await User.findOne({ username: req.params.username });
-        
+
         if (!userToUnfollow) {
             return res.status(404).json({ message: 'User not found' });
         }
 
         const profile = await Profile.findOne({ user: req.session.userId });
-        
+
         if (!profile) {
             return res.status(404).json({ message: 'Profile not found' });
         }
@@ -82,7 +82,7 @@ router.delete('/:username', isLoggedIn, async (req, res) => {
 
         // Remove from following list
         profile.following = profile.following.filter(
-            id => id.toString() !== userToUnfollow._id.toString()
+            id => id && id.toString() !== userToUnfollow._id.toString()
         );
         await profile.save();
 

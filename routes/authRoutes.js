@@ -4,6 +4,7 @@ const bcrypt = require('bcrypt');
 const User = require('../models/User');
 const Profile = require('../models/Profile');
 const { isLoggedIn } = require('../utils/middleware');
+const passport = require('passport');
 
 // Register
 router.post('/register', async (req, res) => {
@@ -88,6 +89,63 @@ router.post('/login', async (req, res) => {
     }
 });
 
+// Google OAuth routes
+router.get('/google',
+    passport.authenticate('google', { scope: ['profile', 'email'] })
+);
+
+router.get('/google/callback',
+    passport.authenticate('google', { failureRedirect: '/test.html' }),
+    (req, res) => {
+        // Set session
+        req.session.userId = req.user._id;
+        res.redirect('/test.html');
+    }
+);
+
+// Link Google account
+router.post('/link/google', isLoggedIn, async (req, res) => {
+    try {
+        const user = await User.findById(req.session.userId);
+        
+        if (!user) {
+            return res.status(404).json({ message: 'User not found' });
+        }
+
+        const { googleId, email, displayName } = req.body;
+        user.linkGoogleAccount(googleId, email, displayName);
+        await user.save();
+
+        res.json({ message: 'Successfully linked Google account' });
+    } catch (error) {
+        res.status(500).json({ 
+            message: 'Error linking account',
+            error: error.message 
+        });
+    }
+});
+
+// Unlink Google account
+router.delete('/unlink/google', isLoggedIn, async (req, res) => {
+    try {
+        const user = await User.findById(req.session.userId);
+        
+        if (!user) {
+            return res.status(404).json({ message: 'User not found' });
+        }
+
+        user.unlinkGoogleAccount();
+        await user.save();
+
+        res.json({ message: 'Successfully unlinked Google account' });
+    } catch (error) {
+        res.status(500).json({ 
+            message: 'Error unlinking account',
+            error: error.message 
+        });
+    }
+});
+
 // Logout
 router.put('/logout', isLoggedIn, (req, res) => {
     req.session.destroy((err) => {
@@ -126,6 +184,15 @@ router.put('/password', isLoggedIn, async (req, res) => {
             error: error.message 
         });
     }
+});
+
+// Test authentication status
+router.get('/test', (req, res) => {
+    res.json({
+        isAuthenticated: req.isAuthenticated(),
+        user: req.user,
+        session: req.session
+    });
 });
 
 module.exports = router;

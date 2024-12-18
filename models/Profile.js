@@ -38,7 +38,8 @@ const profileSchema = new mongoose.Schema({
     },
     following: [{
         type: mongoose.Schema.Types.ObjectId,
-        ref: 'User'
+        ref: 'User',
+        default: []
     }],
     updatedAt: {
         type: Date,
@@ -47,7 +48,7 @@ const profileSchema = new mongoose.Schema({
 });
 
 // Virtual for user's age
-profileSchema.virtual('age').get(function() {
+profileSchema.virtual('age').get(function () {
     return Math.floor((Date.now() - this.dob.getTime()) / (1000 * 60 * 60 * 24 * 365.25));
 });
 

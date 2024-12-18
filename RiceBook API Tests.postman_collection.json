@@ -1,0 +1,446 @@
+{
+  "info": {
+    "name": "RiceBook API Tests",
+    "description": "API Test Collection for RiceBook Backend",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+  },
+  "item": [
+    {
+      "name": "Authentication",
+      "item": [
+        {
+          "name": "Register",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n    \"username\": \"testuser\",\n    \"password\": \"123456\",\n    \"email\": \"test@example.com\",\n    \"dob\": \"1990-01-01\",\n    \"phone\": \"123-456-7890\",\n    \"zipcode\": \"12345\"\n}"
+            },
+            "url": {
+              "raw": "{{BASE_URL}}/auth/register",
+              "host": ["{{BASE_URL}}"],
+              "path": ["auth", "register"]
+            }
+          }
+        },
+        {
+          "name": "Login",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n    \"username\": \"testuser\",\n    \"password\": \"123456\"\n}"
+            },
+            "url": {
+              "raw": "{{BASE_URL}}/auth/login",
+              "host": ["{{BASE_URL}}"],
+              "path": ["auth", "login"]
+            }
+          }
+        },
+        {
+          "name": "Change Password",
+          "request": {
+            "method": "PUT",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Cookie",
+                "value": "{{TOKEN}}"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n    \"oldPassword\": \"123456\",\n    \"newPassword\": \"654321\"\n}"
+            },
+            "url": {
+              "raw": "{{BASE_URL}}/auth/password",
+              "host": ["{{BASE_URL}}"],
+              "path": ["auth", "password"]
+            }
+          }
+        },
+        {
+          "name": "Logout",
+          "request": {
+            "method": "PUT",
+            "header": [
+              {
+                "key": "Cookie",
+                "value": "{{TOKEN}}"
+              }
+            ],
+            "url": {
+              "raw": "{{BASE_URL}}/auth/logout",
+              "host": ["{{BASE_URL}}"],
+              "path": ["auth", "logout"]
+            }
+          }
+        }
+      ]
+    },
+    {
+      "name": "Profile",
+      "item": [
+        {
+          "name": "Get Personal Headline",
+          "request": {
+            "method": "GET",
+            "header": [
+              {
+                "key": "Cookie",
+                "value": "{{TOKEN}}"
+              }
+            ],
+            "url": {
+              "raw": "{{BASE_URL}}/profiles/headline",
+              "host": ["{{BASE_URL}}"],
+              "path": ["profiles", "headline"]
+            }
+          }
+        },
+        {
+          "name": "Update Headline",
+          "request": {
+            "method": "PUT",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Cookie",
+                "value": "{{TOKEN}}"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n    \"headline\": \"New headline\"\n}"
+            },
+            "url": {
+              "raw": "{{BASE_URL}}/profiles/headline",
+              "host": ["{{BASE_URL}}"],
+              "path": ["profiles", "headline"]
+            }
+          }
+        },
+        {
+          "name": "Get Email",
+          "request": {
+            "method": "GET",
+            "header": [
+              {
+                "key": "Cookie",
+                "value": "{{TOKEN}}"
+              }
+            ],
+            "url": {
+              "raw": "{{BASE_URL}}/profiles/email",
+              "host": ["{{BASE_URL}}"],
+              "path": ["profiles", "email"]
+            }
+          }
+        },
+        {
+          "name": "Update Email",
+          "request": {
+            "method": "PUT",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Cookie",
+                "value": "{{TOKEN}}"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n    \"email\": \"newemail@example.com\"\n}"
+            },
+            "url": {
+              "raw": "{{BASE_URL}}/profiles/email",
+              "host": ["{{BASE_URL}}"],
+              "path": ["profiles", "email"]
+            }
+          }
+        }
+      ]
+    },
+    {
+      "name": "File Upload",
+      "item": [
+        {
+          "name": "Upload Image",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Cookie",
+                "value": "{{TOKEN}}"
+              }
+            ],
+            "body": {
+              "mode": "formdata",
+              "formdata": [
+                {
+                  "key": "image",
+                  "type": "file",
+                  "src": []
+                }
+              ]
+            },
+            "url": {
+              "raw": "{{BASE_URL}}/upload/image",
+              "host": ["{{BASE_URL}}"],
+              "path": ["upload", "image"]
+            }
+          }
+        },
+        {
+          "name": "Upload Avatar",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Cookie",
+                "value": "{{TOKEN}}"
+              }
+            ],
+            "body": {
+              "mode": "formdata",
+              "formdata": [
+                {
+                  "key": "avatar",
+                  "type": "file",
+                  "src": []
+                }
+              ]
+            },
+            "url": {
+              "raw": "{{BASE_URL}}/upload/avatar",
+              "host": ["{{BASE_URL}}"],
+              "path": ["upload", "avatar"]
+            }
+          }
+        }
+      ]
+    },
+    {
+      "name": "Articles",
+      "item": [
+        {
+          "name": "Get Articles List",
+          "request": {
+            "method": "GET",
+            "header": [
+              {
+                "key": "Cookie",
+                "value": "{{TOKEN}}"
+              }
+            ],
+            "url": {
+              "raw": "{{BASE_URL}}/articles",
+              "host": ["{{BASE_URL}}"],
+              "path": ["articles"]
+            }
+          }
+        },
+        {
+          "name": "Get Single Article",
+          "request": {
+            "method": "GET",
+            "header": [
+              {
+                "key": "Cookie",
+                "value": "{{TOKEN}}"
+              }
+            ],
+            "url": {
+              "raw": "{{BASE_URL}}/articles/:id",
+              "host": ["{{BASE_URL}}"],
+              "path": ["articles", ":id"],
+              "variable": [
+                {
+                  "key": "id",
+                  "value": "article_id"
+                }
+              ]
+            }
+          }
+        },
+        {
+          "name": "Create Article",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Cookie",
+                "value": "{{TOKEN}}"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n    \"text\": \"This is a test article\",\n    \"title\": \"Test Article\",\n    \"image\": \"https://example.com/image.jpg\"\n}"
+            },
+            "url": {
+              "raw": "{{BASE_URL}}/articles",
+              "host": ["{{BASE_URL}}"],
+              "path": ["articles"]
+            }
+          }
+        },
+        {
+          "name": "Update Article",
+          "request": {
+            "method": "PUT",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Cookie",
+                "value": "{{TOKEN}}"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n    \"text\": \"Updated article content\",\n    \"title\": \"Updated Title\"\n}"
+            },
+            "url": {
+              "raw": "{{BASE_URL}}/articles/:id",
+              "host": ["{{BASE_URL}}"],
+              "path": ["articles", ":id"],
+              "variable": [
+                {
+                  "key": "id",
+                  "value": "article_id"
+                }
+              ]
+            }
+          }
+        },
+        {
+          "name": "Add Comment",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Cookie",
+                "value": "{{TOKEN}}"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n    \"text\": \"This is a test comment\"\n}"
+            },
+            "url": {
+              "raw": "{{BASE_URL}}/articles/:id/comments",
+              "host": ["{{BASE_URL}}"],
+              "path": ["articles", ":id", "comments"],
+              "variable": [
+                {
+                  "key": "id",
+                  "value": "article_id"
+                }
+              ]
+            }
+          }
+        }
+      ]
+    },
+    {
+      "name": "Following",
+      "item": [
+        {
+          "name": "Get Following List",
+          "request": {
+            "method": "GET",
+            "header": [
+              {
+                "key": "Cookie",
+                "value": "{{TOKEN}}"
+              }
+            ],
+            "url": {
+              "raw": "{{BASE_URL}}/following",
+              "host": ["{{BASE_URL}}"],
+              "path": ["following"]
+            }
+          }
+        },
+        {
+          "name": "Follow User",
+          "request": {
+            "method": "PUT",
+            "header": [
+              {
+                "key": "Cookie",
+                "value": "{{TOKEN}}"
+              }
+            ],
+            "url": {
+              "raw": "{{BASE_URL}}/following/:username",
+              "host": ["{{BASE_URL}}"],
+              "path": ["following", ":username"],
+              "variable": [
+                {
+                  "key": "username",
+                  "value": "user_to_follow"
+                }
+              ]
+            }
+          }
+        },
+        {
+          "name": "Unfollow User",
+          "request": {
+            "method": "DELETE",
+            "header": [
+              {
+                "key": "Cookie",
+                "value": "{{TOKEN}}"
+              }
+            ],
+            "url": {
+              "raw": "{{BASE_URL}}/following/:username",
+              "host": ["{{BASE_URL}}"],
+              "path": ["following", ":username"],
+              "variable": [
+                {
+                  "key": "username",
+                  "value": "user_to_unfollow"
+                }
+              ]
+            }
+          }
+        }
+      ]
+    }
+  ]
+}
